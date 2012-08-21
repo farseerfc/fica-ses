@@ -1,0 +1,1871 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0039)http://tyr.ics.es.osaka-u.ac.jp/result/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="http://tyr.ics.es.osaka-u.ac.jp/static/favicon.ico">
+        <script type="text/javascript" src="./hotta-result_files/jquery-1.6.2.js"></script>
+        <script type="text/javascript" src="./hotta-result_files/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="./hotta-result_files/jquery.scrollintoview.min.js"></script>
+
+        <script type="text/javascript" src="./hotta-result_files/bootstrap-scrollspy.js"> </script>
+        <script type="text/javascript" src="./hotta-result_files/bootstrap-buttons.js"> </script>
+        <script type="text/javascript" src="./hotta-result_files/bootstrap-modal.js"> </script>
+        <script type="text/javascript" src="./hotta-result_files/bootstrap-dropdown.js"> </script>
+        <script type="text/javascript" src="./hotta-result_files/bootstrap-alerts.js"> </script>
+
+        <script type="text/javascript" src="./hotta-result_files/sijax.js"></script>
+
+        <script language="javascript" type="text/javascript" src="./hotta-result_files/d3.min.js"></script>
+        <script language="javascript" type="text/javascript" src="./hotta-result_files/chosen.jquery.js"></script>
+
+
+        <script src="./hotta-result_files/d3.layout.min.js" type="text/javascript"> </script>
+        <script src="./hotta-result_files/d3.geom.min.js" type="text/javascript"> </script>
+
+
+        <script type="text/javascript" src="./hotta-result_files/fica.js"> </script>
+
+        <script type="text/javascript">
+            Sijax.setRequestUri("/result/");Sijax.setJsonUri("/static/sijax/json2.js");
+        </script>
+        <link type="text/css" href="./hotta-result_files/jquery-ui-1.8.16.custom.css" rel="stylesheet">	
+        <link type="text/css" href="./hotta-result_files/bootstrap.css" rel="stylesheet">
+
+        <link href="./hotta-result_files/force.css" rel="stylesheet" type="text/css">
+        <link href="./hotta-result_files/chosen.css" rel="stylesheet" type="text/css">
+
+
+        
+        
+
+<title>Result</title>
+
+<script src="./hotta-result_files/highcharts.js"></script>
+<script src="./hotta-result_files/exporting.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+    var loadresult = function(id){
+        $("#body").html($("#loading").clone().removeClass("hide"));
+        target = $("#target").attr("value");
+        N = $("#N").attr("value");
+        Sijax.request('user_result', [id, target, N]);   
+    }
+
+    var loadallresult = function(){
+        $("#body").html($("#loading").clone().removeClass("hide"));
+        Sijax.request('all_result');   
+    }
+
+    var loadd3json = function(id){
+        $("#body").html($("#loading").clone().removeClass("hide"));
+        Sijax.request('d3json', [id]);   
+    }
+
+    $(document).ready(function () {
+        $("#userlist").accordion({event:"click", autoHeight: false});
+    });
+
+</script>
+
+<style type="text/css">
+
+    .fcfcfcccffccfcf{
+    }
+
+    .tokenseq{
+        overflow: auto;
+        max-height: 80px;
+        background-color: rgb(240,240,240);
+        font-size: x-small;
+        width: 100%;
+    }
+
+    .scrollbox{
+        overflow-y: auto;
+        top: 0;
+        left: 0;
+    }
+
+    .marked{
+        color: blue;
+    }
+
+    .unmarked{
+        color: red;
+    }
+
+    .unknown{
+        color: black;
+    }
+
+    .selected{
+        font-style: italic;
+        font-weight: bolder;
+    }
+
+
+    .scrollable-sections-top-shadow {
+        background-image: -moz-radial-gradient(center top , ellipse farthest-side, rgba(0, 0, 0, 0.3), transparent);
+        border-top: 1px solid rgba(0, 0, 0, 0.4);
+        top: 0;
+        height: 8px;
+        left: 0;
+        margin-right: 0;
+        position: relative;
+
+    }
+
+    .scrollable-sections-bottom-shadow {
+        background-image: -moz-radial-gradient(center bottom , ellipse farthest-side, rgba(0, 0, 0, 0.3), transparent);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+        bottom: 0;
+        height: 8px;
+        left: 0;
+        margin-right: 0;
+        position: relative; 
+    }
+
+    .scrollable-holder {
+        position: relative;
+	float: left;
+    }
+
+    .processbar{
+        float: left; 
+        height: 1em;
+        width: 100%;
+        position: relative;
+        background-color: white;
+        border: 1px solid black; 
+    }
+
+    .processbar-value{
+        height: 1em;
+        position: absolute;
+        left: 0;
+    }
+
+    .processbar-blue{
+        color: #ffffff;
+        background-color: #0064cd;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+        background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+        background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+        background-image: linear-gradient(top, #049cdb, #0064cd);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border-color: #0064cd #0064cd #003f81;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    }
+
+    .fdg{
+        background-color: #EEEEEE;
+    }
+
+
+    .processbar-red{
+        background-color: #c43c35;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
+        background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: -ms-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee5f5b), color-stop(100%, #c43c35));
+        background-image: -webkit-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: -o-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: linear-gradient(top, #ee5f5b, #c43c35);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ee5f5b', endColorstr='#c43c35', GradientType=0);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border-color: #c43c35 #c43c35 #882a25;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    }
+
+</style>
+
+
+    </head>
+
+    <body>
+<div class="span8">
+<table>
+    <tbody><tr>
+        <th title="Length of this cloneset, click to see cloneset">Len</th>
+        <th title="Consine similarity between this cloneset and interesting training set of clonesets">Int</th>
+        <th title="Judgement of algorithm">Eval</th>
+        <th title="Consine similarity between this cloneset and un-interesting training set of clonesets">UnI</th>
+        <th title="Judgement of user">Real</th>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a28">58</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.67%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 1670.06 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.00%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a15">64</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.27%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 1265.27 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.00%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a1e">60</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.08%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 1078.18 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.00%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009ff">82</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.73%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 731.14 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.00%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a0a">76</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.50%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 503.76 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.00%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a40">50</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.09%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 86.69 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.00%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a27">58</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">2.84%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 26.61 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.11%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a1a">62</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">4.53%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 13.61 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.33%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a2f">56</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.42%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 9.69 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.15%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f6">95</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.87%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 9.22 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.09%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f3">103</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.71%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 8.37 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.20%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e4">266</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">3.08%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 8.15 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.38%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a45">49</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">2.26%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 8.08 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.28%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f7">94</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">5.21%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 7.99 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.65%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a0b">76</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">4.58%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 7.66 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.60%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a34">54</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">4.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 6.99 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.57%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a13">66</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">3.53%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 6.78 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.52%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a20">59</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.08%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 3.88 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.28%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a47">49</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">4.05%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 3.72 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">1.09%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a25">58</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">2.05%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 3.65 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.56%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009fe">83</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.77%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 2.30 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">0.33%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn primary small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a3e">51</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">4.16%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn primary small"> 1.70 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">2.45%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e2">343</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">1.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.36 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">2.78%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a2e">56</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.55%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">22.22%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a1c">61</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.54%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">22.05%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009ef">122</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.54%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">22.57%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a07">77</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.54%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">22.43%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f4">96</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.45%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">19.20%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a01">81</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.51%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">24.18%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a43">49</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.52%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">25.15%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a3f">51</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.40%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">21.92%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a10">70</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.07%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">4.14%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a38">53</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.41%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">26.05%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a36">54</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.34%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.02 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">21.68%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e5">229</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">3.96%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009ee">123</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">3.96%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a1b">62</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">4.03%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a05">78</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">4.38%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009eb">173</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">7.78%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009fc">86</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">7.85%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a22">58</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">7.86%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e6">207</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">13.87%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a09">76</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">14.12%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f9">87</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">15.83%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009fa">87</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">15.83%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009fb">87</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">15.83%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a06">77</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">16.27%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a29">57</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">17.55%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a11">70</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">18.50%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e0">531</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">18.51%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a03">80</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">18.53%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a39">52</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">18.89%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f5">95</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">20.27%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f8">89</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">20.38%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+    <tr>
+        <td title="Length of this cloneset, click to see cloneset">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a0e">71</a>
+        </td>
+        <td title="Consine similarity between this cloneset and interesting training set of clonesets">
+            <span class="marked">0.00%</span>
+        </td>
+        <td title="Judgement of algorithm">
+            
+            <a class="btn danger small">  0.00 </a>
+            
+        </td>
+        <td title="Consine similarity between this cloneset and un-interesting training set of clonesets">
+            <span class="unmarked">20.56%</span>
+        </td>
+        <td title="Judgement of user">
+            
+            <a class="btn danger small">　</a>
+            
+        </td>
+    </tr>
+    
+</tbody></table>
+
+Training Clone Sets
+<table>
+    
+    <tbody><tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009df">1430</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e1">453</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e3">296</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e7">200</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e8">193</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009e9">177</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009ea">177</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009ec">138</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009ed">127</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f0">112</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f1">109</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009f2">107</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac0009fd">83</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a00">82</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a02">80</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a04">79</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a08">77</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a0c">74</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a0d">74</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a0f">71</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a12">68</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a14">64</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a16">64</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a17">63</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a18">62</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a19">62</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a1d">60</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a1f">59</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a21">59</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a23">58</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a24">58</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a26">58</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a2a">57</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a2b">57</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a2c">56</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a2d">56</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a30">56</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a31">55</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a32">54</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a33">54</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a35">54</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a37">53</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a3a">52</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a3b">52</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a3c">52</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a3d">52</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a41">50</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a42">49</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a44">49</a></td>
+        <td>
+            
+            <a class="btn primary small">　
+            
+        </a></td>
+    </tr>
+    
+    <tr>
+        <td><a href="http://tyr.ics.es.osaka-u.ac.jp/project/4f1f68ccb61c5411ac0009dd?cs=4f1f68ccb61c5411ac000a46">49</a></td>
+        <td>
+            
+            <a class="btn danger small">　
+            
+        </a></td>
+    </tr>
+    
+</tbody></table>
+
+</div>
+    
+</body></html>

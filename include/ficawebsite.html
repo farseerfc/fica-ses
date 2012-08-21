@@ -1,0 +1,493 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0037)http://tyr.ics.es.osaka-u.ac.jp/index -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="http://tyr.ics.es.osaka-u.ac.jp/static/favicon.ico">
+        <script type="text/javascript" src="./ficawebsite_files/jquery-1.6.2.js"></script>
+        <script type="text/javascript" src="./ficawebsite_files/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="./ficawebsite_files/jquery.scrollintoview.min.js"></script>
+
+        <script type="text/javascript" src="./ficawebsite_files/bootstrap-scrollspy.js"> </script>
+        <script type="text/javascript" src="./ficawebsite_files/bootstrap-buttons.js"> </script>
+        <script type="text/javascript" src="./ficawebsite_files/bootstrap-modal.js"> </script>
+        <script type="text/javascript" src="./ficawebsite_files/bootstrap-dropdown.js"> </script>
+        <script type="text/javascript" src="./ficawebsite_files/bootstrap-alerts.js"> </script>
+
+        <script type="text/javascript" src="./ficawebsite_files/sijax.js"></script>
+
+        <script language="javascript" type="text/javascript" src="./ficawebsite_files/d3.min.js"></script>
+        <script language="javascript" type="text/javascript" src="./ficawebsite_files/chosen.jquery.js"></script>
+
+
+        <script src="./ficawebsite_files/d3.layout.min.js" type="text/javascript"> </script>
+        <script src="./ficawebsite_files/d3.geom.min.js" type="text/javascript"> </script>
+
+
+        <script type="text/javascript" src="./ficawebsite_files/fica.js"> </script>
+
+        <script type="text/javascript">
+            Sijax.setRequestUri("/index");Sijax.setJsonUri("/static/sijax/json2.js");
+        </script>
+        <link type="text/css" href="./ficawebsite_files/jquery-ui-1.8.16.custom.css" rel="stylesheet">	
+        <link type="text/css" href="./ficawebsite_files/bootstrap.css" rel="stylesheet">
+
+        <link href="./ficawebsite_files/force.css" rel="stylesheet" type="text/css">
+        <link href="./ficawebsite_files/chosen.css" rel="stylesheet" type="text/css">
+
+        <style type="text/css">
+            html, body {
+                background-color: #eee;
+            }
+            body {
+                margin-top: 60px;
+            }
+            /* The white background content wrapper */
+            .content {
+              background-color: #fff;
+              padding: 20px 20px;
+              -webkit-border-radius: 0 0 6px 6px;
+                 -moz-border-radius: 0 0 6px 6px;
+                      border-radius: 0 0 6px 6px;
+              -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                 -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                      box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            }
+
+            /* Page header tweaks */
+            .page-header {
+              background-color: #f5f5f5;
+              padding: 20px 20px 10px;
+              margin: -20px -20px 20px;
+            }
+            
+
+        </style>
+        
+        
+
+<title>Fica Is code Clone Analyser</title>
+<script language="javascript" type="text/javascript" src="./ficawebsite_files/jquery.validate.js"></script>
+
+<script language="javascript" type="text/javascript" src="./ficawebsite_files/bootstrap-twipsy.js"></script>
+
+<script language="javascript" type="text/javascript" src="./ficawebsite_files/bootstrap-popover.js"></script>
+
+
+<script language="javascript" type="text/javascript">
+  // javascript
+$(document).ready(function() {
+    $("#projects").accordion({
+        event: "click hoverintent",
+        autoHeight: false
+    });
+
+    $("#archive").live("change", function() {
+        $("#prj_name").attr("value", $(this).attr("value"));
+    });
+
+    $(document).ready(function() {
+        $("#registerform").validate();
+    });
+
+    $(".processbar").each(function() {
+        $(this).popover()
+    });
+  });
+</script>
+
+<style type="text/css">
+
+  .aaa{
+  }
+
+  label { width: 10em; float: left; }
+  label.error { float: none; color: red; padding-left: .5em; vertical-align:
+    top; }
+
+  .fcinput{
+    height: 28px;
+  }
+
+
+  .processbar{
+    float: left; 
+    height: 1em;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    border: 1px solid black; 
+  }
+
+  .processbar-value{
+    height: 1em;
+    position: absolute;
+    left: 0;
+  }
+
+  .processbar-blue{
+    color: #ffffff;
+    background-color: #0064cd;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+    background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+    background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+    background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+    background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+    background-image: linear-gradient(top, #049cdb, #0064cd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-color: #0064cd #0064cd #003f81;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  }
+
+
+
+  .processbar-red{
+    background-color: #c43c35;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
+    background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
+    background-image: -ms-linear-gradient(top, #ee5f5b, #c43c35);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee5f5b), color-stop(100%, #c43c35));
+    background-image: -webkit-linear-gradient(top, #ee5f5b, #c43c35);
+    background-image: -o-linear-gradient(top, #ee5f5b, #c43c35);
+    background-image: linear-gradient(top, #ee5f5b, #c43c35);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ee5f5b', endColorstr='#c43c35', GradientType=0);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-color: #c43c35 #c43c35 #882a25;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  }
+
+</style>
+
+
+    </head>
+
+    <body>
+
+        <div id="modal-wait" class="modal hide fade">
+          <div class="modal-header">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/index#" class="close">×</a>
+            <h3>Processing ... </h3>
+          </div>
+          <div class="modal-body">
+
+            <p>Operation is on processing.</p>
+            <p>Please wait for a while ...</p>
+          </div>
+          <div class="modal-footer">
+            <a href="http://tyr.ics.es.osaka-u.ac.jp/index#" class="btn primary">OK</a>
+          </div>
+        </div>
+        <div class="topbar" data-scrollspy="scrollspy">
+        <div class="topbar-inner">
+          <div class="container-fluid">
+              <a class="brand" href="http://tyr.ics.es.osaka-u.ac.jp/#">
+                  Fica
+              </a>
+
+              <ul class="nav">
+
+                  
+<li class="active"><a href="./ficawebsite_files/ficawebsite.html">Home</a></li>
+<li><a href="http://tyr.ics.es.osaka-u.ac.jp/result">Result</a></li>
+<li><a href="http://tyr.ics.es.osaka-u.ac.jp/about">About</a></li>
+
+              </ul>
+
+              <ul class="nav secondary-nav">
+                  
+                      <li>
+                          <form class="pull-right" action="http://tyr.ics.es.osaka-u.ac.jp/login" method="POST">
+                              <input type="text" size="10" placeholder="Username" name="username" id="username">
+                              <input type="password" size="10" placeholder="Password" name="password" id="password">
+                              <input type="submit" value="Login">
+                          </form>
+                      </li>
+                  
+              </ul>
+          </div>
+        </div>
+        </div>
+        <div class="container-fluid">
+            <div class="sidebar">
+              <div class="well">
+                  
+
+
+
+<h5> Projects </h5>
+
+<div id="projects" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+    
+    <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span>
+        <a href="http://tyr.ics.es.osaka-u.ac.jp/index#" id="prj-4f1f687db61c5411ac000671">
+
+            survey git-v1.7.9-rc1
+        </a>
+    </h3>
+    
+    <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active" role="tabpanel">
+       <p> 12-01-25 02:26 </p>
+       <p> Token length: 48</p>
+       <p> Groupped: True</p>
+       <p> Cloneset: 78</p>
+        
+
+          <hr>
+            
+       
+            <a onclick="wait(); window.location.href=&#39;/project/4f1f687db61c5411ac000671&#39;" hreffc="/project/4f1f687db61c5411ac000671" title="Show project survey git-v1.7.9-rc1" class="btn small primary">
+                View
+            </a>
+    </div>
+    
+    <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span>
+        <a href="http://tyr.ics.es.osaka-u.ac.jp/index#" id="prj-4f1f6895b61c5411ac0007a9">
+
+            survey xz-5.0.3
+        </a>
+    </h3>
+    
+    <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none; ">
+       <p> 12-01-25 02:27 </p>
+       <p> Token length: 48</p>
+       <p> Groupped: True</p>
+       <p> Cloneset: 36</p>
+        
+
+          <hr>
+            
+       
+            <a onclick="wait(); window.location.href=&#39;/project/4f1f6895b61c5411ac0007a9&#39;" hreffc="/project/4f1f6895b61c5411ac0007a9" title="Show project survey xz-5.0.3" class="btn small primary">
+                View
+            </a>
+    </div>
+    
+    <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span>
+        <a href="http://tyr.ics.es.osaka-u.ac.jp/index#" id="prj-4f1f68ccb61c5411ac0009dd">
+
+            survey bash-4.2
+        </a>
+    </h3>
+    
+    <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none; ">
+       <p> 12-01-25 02:28 </p>
+       <p> Token length: 48</p>
+       <p> Groupped: True</p>
+       <p> Cloneset: 105</p>
+        
+
+          <hr>
+            
+       
+            <a onclick="wait(); window.location.href=&#39;/project/4f1f68ccb61c5411ac0009dd&#39;" hreffc="/project/4f1f68ccb61c5411ac0009dd" title="Show project survey bash-4.2" class="btn small primary">
+                View
+            </a>
+    </div>
+    
+    <h3 class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all" role="tab" aria-expanded="false" aria-selected="false" tabindex="-1"><span class="ui-icon ui-icon-triangle-1-e"></span>
+        <a href="http://tyr.ics.es.osaka-u.ac.jp/index#" id="prj-4f1f68fdb61c5411ac000c7f">
+
+            survey e2fsprogs-1.41.14
+        </a>
+    </h3>
+    
+    <div class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom" role="tabpanel" style="display: none; ">
+       <p> 12-01-25 02:29 </p>
+       <p> Token length: 64</p>
+       <p> Groupped: True</p>
+       <p> Cloneset: 62</p>
+        
+
+          <hr>
+            
+       
+            <a onclick="wait(); window.location.href=&#39;/project/4f1f68fdb61c5411ac000c7f&#39;" hreffc="/project/4f1f68fdb61c5411ac000c7f" title="Show project survey e2fsprogs-1.41.14" class="btn small primary">
+                View
+            </a>
+    </div>
+         
+</div>
+
+<hr>
+
+<p> All 4 projects. </p>
+
+
+
+              </div>
+            </div>
+            <div class="content">
+
+                
+                
+                
+<div class="row">
+    <section id="welcome" class="span6 well">
+    
+        <div class="section" id="welcome-to-fica">
+<h2>Welcome to Fica!</h2>
+<p><strong>Fica</strong> is a survey about source code clones in softwares.</p>
+<p>We need your help!</p>
+<p>The survey will take around <strong>2 hours</strong> approximately. You can suspend in
+the middle and come back at any time with your convenience. Although to keep
+a consistency among collected data, we strongly recommanded you to finish the
+survey with in one day.</p>
+</div>
+<div class="section" id="how-to-participate">
+<h2>How to participate?</h2>
+<p>To participate the survey, please register as a new user in the following form.</p>
+<p>If you have registered, please login from the right top corner.</p>
+</div>
+
+      </section>
+
+      <section id="register" class="span7 well">
+
+
+        <h1>Register a new user<small>(required)</small></h1>
+        
+        <form name="registerform" id="registerform" action="http://tyr.ics.es.osaka-u.ac.jp/register" method="post" novalidate="novalidate">
+            <fieldset>
+                <div class="clearfix">
+                    <label for="username">Username</label>
+                    <div class="input">
+                        <input id="username" name="username" class="fcinput
+                        required" type="text" size="32">
+                    </div>
+                    <label for="email">Email</label>
+                    <div class="input">
+                        <input id="email" name="email" class="fcinput required
+                        email" type="text" size="64">
+                    </div>
+                    <label for="password">Password</label>
+                    <div class="input">
+                        <input id="password" name="password" class="fcinput
+                        required" type="password" size="32">
+                    </div>
+                    <label for="password2">Password Again</label>
+                    <div class="input">
+                        <input id="password2" name="password2" class="fcinput
+                        required" type="password" size="32">
+                    </div>
+                    <label for="privacy">Privacy</label>
+                    <div class="input"><input class="fcinput" type="checkbox" id="privacy" name="privacy"> Agree the Privacy Agreement</div>
+                </div>
+                <div class="actions">
+                    <!-- <input onclick="wait(); document.registerform.submit();"
+                    class="btn primary" type="submit" value="Register" /> -->
+                    <input class="btn primary" type="submit" value="Next"> 
+                </div>
+            </fieldset>
+        </form>
+      </section>
+
+      <div class="span12 well">
+        <div class="section" id="about-register">
+<h2>About Register</h2>
+<p><em>Fica</em> is a system for research purpose only.
+<em>Fica</em> tried very hard to study the habit of each user and provide individual
+result according to the study.</p>
+<p>In that sense, We need to collect some information of every surveyee in
+this research, so that we can determined the parameters that affected the
+study result of <strong>Fica</strong>, and improve our result.</p>
+</div>
+<div class="section" id="privacy-agreements">
+<h2>Privacy Agreements</h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Privacy Informations collected by <em>Fica</em></dt>
+<dd><ul class="first">
+<li><dl class="first docutils">
+<dt>Username (Required)</dt>
+<dd><p class="first last">Nickname is sufficient.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Email Address (Required)</dt>
+<dd><p class="first last">To inform you about the important notice of <em>Fica</em> only.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Password (Required)</dt>
+<dd><p class="first last">To login into <em>Fica</em> system.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Gender (Optional)</p>
+</li>
+<li><p class="first">Age (Optional)</p>
+</li>
+<li><p class="first">Major in college/university (Optional)</p>
+</li>
+<li><p class="first">Programming Experience (Optional)</p>
+</li>
+<li><p class="first">Programming Language (Optional)</p>
+</li>
+<li><p class="first">C Language Experience (Optional)</p>
+</li>
+<li><p class="first">Knowledge on Code Clone (Optional)</p>
+</li>
+</ul>
+<p class="last">And your IP address are only recorded as access log.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>Fica</em> will <em>NEVER</em> publish your Email address or password in any form.</dt>
+<dd><p class="first last">We will only use your Email address internally in some circumstances such
+as when follow up survey are needed or analysis result of your data is ready.
+And your password is kept only by you.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><em>Fica</em> <em>WILL</em> publish your selections on clonesets. But <em>Fica</em> will <em>NEVER</em> publish your selection data associated with your privacy data other than username.</dt>
+<dd><p class="first last">Because of that, please select a nickname as username that is hard to trace your privacy.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>We will <em>NEVER</em> sell your any data to third parties.</dt>
+<dd><p class="first last">We will only publish your selection data, in altered format so that it is impossible to trace your privacy, to academic.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>You are free to change your optional privacy data.</dt>
+<dd><p class="first last">After login, you can click the "Change Information" button under your login-ed
+username.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>You have the rights to change your required privacy data.</dt>
+<dd><p class="first last">As for username and Email address, you can changed them by sending a Email to <a class="reference external" href="mailto:jc-yang@ist.osaka-u.ac.jp">me</a>. This requires some modification directly
+into database so you can not change it on this website.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+
+      </div>
+
+    
+
+    
+    
+    
+</div>
+
+
+                <footer>
+                  <p> jc-yang AT ics.es.osaka-u.ac.jp Osaka
+                  University</p>
+                </footer>
+            </div>
+        </div>
+    
+</body></html>

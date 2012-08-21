@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0064)http://tyr.ics.es.osaka-u.ac.jp/project/4f1f687db61c5411ac000671 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="http://tyr.ics.es.osaka-u.ac.jp/static/favicon.ico">
+        <script type="text/javascript" src="./codeclone_files/jquery-1.6.2.js"></script>
+        <script type="text/javascript" src="./codeclone_files/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="./codeclone_files/jquery.scrollintoview.min.js"></script>
+
+
+
+        <script type="text/javascript" src="./codeclone_files/sijax.js"></script>
+
+        <script language="javascript" type="text/javascript" src="./codeclone_files/d3.min.js"></script>
+        <script language="javascript" type="text/javascript" src="./codeclone_files/chosen.jquery.js"></script>
+
+
+        <script src="./codeclone_files/d3.layout.min.js" type="text/javascript"> </script>
+        <script src="./codeclone_files/d3.geom.min.js" type="text/javascript"> </script>
+
+
+        <script type="text/javascript" src="./codeclone_files/fica.js"> </script>
+
+        <script type="text/javascript">
+            Sijax.setRequestUri("/project/4f1f687db61c5411ac000671");Sijax.setJsonUri("/static/sijax/json2.js");
+        </script>
+        <link type="text/css" href="./codeclone_files/jquery-ui-1.8.16.custom.css" rel="stylesheet">	
+        <link type="text/css" href="./codeclone_files/bootstrap.css" rel="stylesheet">
+
+        <link href="./codeclone_files/force.css" rel="stylesheet" type="text/css">
+        <link href="./codeclone_files/chosen.css" rel="stylesheet" type="text/css">
+        
+<link rel="stylesheet" href="http://tyr.ics.es.osaka-u.ac.jp/pygments.css">
+<title>Fica -- survey git-v1.7.9-rc1 12-01-25 02:26:57</title>
+
+<script language="javascript">
+
+    var reheight = function(){
+
+        $(".scrollbox").each(function (){
+            $(this).css("max-height", $(window).height() -
+                $(this).offset().top -
+                $(this).attr("data-padding-bottom"));
+        });
+    }
+
+    var loadCSInternal = function(id){
+        $("#codebody").html($("#loading").clone().removeClass("hide"));
+        Sijax.request('cloneset', [id]);  
+    }
+
+    var loadCloneset = function(id){
+        loadCSInternal(id);  
+        
+        currentUrl = window.location.href;
+        baseUrl = currentUrl.replace(/\?.*$/,"");
+        newUrl = baseUrl+"?cs="+id
+        window.history.pushState({"csid":id},"",newUrl);
+    }
+    window.onpopstate = function(e){
+        if(e.state){
+            loadCSInternal(e.state.csid);
+            $("#clonesets").accordion("activate","#cs-"+e.state.csid);
+        }
+    };
+
+    $(document).ready(function () {
+        $(window).resize(reheight);
+        
+        reheight();
+        $("a[name='c1-176']")[0].scrollIntoView();
+    });
+</script>
+
+<style type="text/css">
+
+
+    .tokenseq{
+        overflow: auto;
+        max-height: 80px;
+        background-color: rgb(240,240,240);
+        font-size: x-small;
+        width: 100%;
+    }
+
+    .scrollbox{
+        overflow-y: auto;
+        top: 0;
+        left: 0;
+    }
+
+    .marked{
+        color: blue;
+    }
+
+    .unmarked{
+        color: red;
+    }
+
+    .unknown{
+        color: black;
+    }
+
+    .selected{
+        font-style: italic;
+        font-weight: bolder;
+    }
+
+
+    .scrollable-holder {
+        position: relative;
+        float: left; 
+    }
+
+    .processbar{
+        float: left; 
+        height: 1em;
+        width: 100%;
+        position: relative;
+        background-color: white;
+        border: 1px solid black; 
+    }
+
+    .processbar-value{
+        height: 1em;
+        position: absolute;
+        left: 0;
+    }
+
+    .processbar-blue{
+        color: #ffffff;
+        background-color: #0064cd;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+        background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+        background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+        background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+        background-image: linear-gradient(top, #049cdb, #0064cd);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border-color: #0064cd #0064cd #003f81;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    }
+
+
+
+    .processbar-red{
+        background-color: #c43c35;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
+        background-image: -moz-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: -ms-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee5f5b), color-stop(100%, #c43c35));
+        background-image: -webkit-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: -o-linear-gradient(top, #ee5f5b, #c43c35);
+        background-image: linear-gradient(top, #ee5f5b, #c43c35);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ee5f5b', endColorstr='#c43c35', GradientType=0);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border-color: #c43c35 #c43c35 #882a25;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    }
+
+</style>
+
+
+    </head>
+
+    <body>
+
+
+    
+    <div id="codebox-container">
+        
+        <div class="codebox" style="width: 50%; ">
+            <h3> blob.c 
+                <small> (6,1)-(23,2)
+                </small>
+            </h3>
+            
+            <div class="scrollable-holder">
+                <div class="scrollable-sections-top-shadow" style="opacity: 5.5;"></div>
+                <div class="scrollbox" data-padding-bottom="20" id="code-scrollbox-0" style="max-height: 716px; ">
+                    <div class="highlight"><pre><a name="c0-1"></a><span class="lineno"> 1</span> <span class="cp">#include "cache.h"</span>
+<a name="c0-2"></a><span class="lineno"> 2</span> <span class="cp">#include "blob.h"</span>
+<a name="c0-3"></a><span class="lineno"> 3</span> 
+<a name="c0-4"></a><span class="lineno"> 4</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">blob_type</span> <span class="o">=</span> <span class="s">"blob"</span><span class="p">;</span>
+<a name="c0-5"></a><span class="lineno"> 5</span> 
+<a name="c0-6"></a><span class="lineno"> 6</span> <span class="hll"><span class="k">struct</span> <span class="n">blob</span> <span class="o">*</span><span class="nf">lookup_blob</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sha1</span><span class="p">)</span>
+</span><a name="c0-7"></a><span class="lineno"> 7</span> <span class="hll"><span class="p">{</span>
+</span><a name="c0-8"></a><span class="lineno"> 8</span> <span class="hll">	<span class="k">struct</span> <span class="n">object</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="n">lookup_object</span><span class="p">(</span><span class="n">sha1</span><span class="p">);</span>
+</span><a name="c0-9"></a><span class="lineno"> 9</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="p">)</span>
+</span><a name="c0-10"></a><span class="lineno">10</span> <span class="hll">		<span class="k">return</span> <span class="n">create_object</span><span class="p">(</span><span class="n">sha1</span><span class="p">,</span> <span class="n">OBJ_BLOB</span><span class="p">,</span> <span class="n">alloc_blob_node</span><span class="p">());</span>
+</span><a name="c0-11"></a><span class="lineno">11</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">)</span>
+</span><a name="c0-12"></a><span class="lineno">12</span> <span class="hll">		<span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">OBJ_BLOB</span><span class="p">;</span>
+</span><a name="c0-13"></a><span class="lineno">13</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">OBJ_BLOB</span><span class="p">)</span> <span class="p">{</span>
+</span><a name="c0-14"></a><span class="lineno">14</span> <span class="hll">		<span class="n">error</span><span class="p">(</span><span class="s">"Object %s is a %s, not a blob"</span><span class="p">,</span>
+</span><a name="c0-15"></a><span class="lineno">15</span> <span class="hll">		      <span class="n">sha1_to_hex</span><span class="p">(</span><span class="n">sha1</span><span class="p">),</span> <span class="kr">typename</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">));</span>
+</span><a name="c0-16"></a><span class="lineno">16</span> <span class="hll">		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><a name="c0-17"></a><span class="lineno">17</span> <span class="hll">	<span class="p">}</span>
+</span><a name="c0-18"></a><span class="lineno">18</span> <span class="hll">	<span class="k">return</span> <span class="p">(</span><span class="k">struct</span> <span class="n">blob</span> <span class="o">*</span><span class="p">)</span> <span class="n">obj</span><span class="p">;</span>
+</span><a name="c0-19"></a><span class="lineno">19</span> <span class="hll"><span class="p">}</span>
+</span><a name="c0-20"></a><span class="lineno">20</span> <span class="hll">
+</span><a name="c0-21"></a><span class="lineno">21</span> <span class="hll"><span class="kt">int</span> <span class="nf">parse_blob_buffer</span><span class="p">(</span><span class="k">struct</span> <span class="n">blob</span> <span class="o">*</span><span class="n">item</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">size</span><span class="p">)</span>
+</span><a name="c0-22"></a><span class="lineno">22</span> <span class="hll"><span class="p">{</span>
+</span><a name="c0-23"></a><span class="lineno">23</span> <span class="hll">	<span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">parsed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><a name="c0-24"></a><span class="lineno">24</span> 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="c0-25"></a><span class="lineno">25</span> <span class="p">}</span>
+</pre></div>
+
+                </div>
+                <div class="scrollable-sections-bottom-shadow" style="opacity: 5.5;"></div>
+            </div>
+        </div>
+        
+        <div class="codebox" style="width: 50%; ">
+            <h3> tree.c 
+                <small> (181,1)-(198,2)
+                </small>
+            </h3>
+            
+            <div class="scrollable-holder">
+                <div class="scrollable-sections-top-shadow" style="opacity: 5.5;"></div>
+                <div class="scrollbox" data-padding-bottom="20" id="code-scrollbox-1" style="max-height: 716px; ">
+                    <div class="highlight"><pre><a name="c1-1"></a><span class="lineno">  1</span> <span class="cp">#include "cache.h"</span>
+<a name="c1-2"></a><span class="lineno">  2</span> <span class="cp">#include "cache-tree.h"</span>
+<a name="c1-3"></a><span class="lineno">  3</span> <span class="cp">#include "tree.h"</span>
+<a name="c1-4"></a><span class="lineno">  4</span> <span class="cp">#include "blob.h"</span>
+<a name="c1-5"></a><span class="lineno">  5</span> <span class="cp">#include "commit.h"</span>
+<a name="c1-6"></a><span class="lineno">  6</span> <span class="cp">#include "tag.h"</span>
+<a name="c1-7"></a><span class="lineno">  7</span> <span class="cp">#include "tree-walk.h"</span>
+<a name="c1-8"></a><span class="lineno">  8</span> 
+<a name="c1-9"></a><span class="lineno">  9</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">tree_type</span> <span class="o">=</span> <span class="s">"tree"</span><span class="p">;</span>
+<a name="c1-10"></a><span class="lineno"> 10</span> 
+<a name="c1-11"></a><span class="lineno"> 11</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">read_one_entry_opt</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sha1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">base</span><span class="p">,</span> <span class="kt">int</span> <span class="n">baselen</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">mode</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stage</span><span class="p">,</span> <span class="kt">int</span> <span class="n">opt</span><span class="p">)</span>
+<a name="c1-12"></a><span class="lineno"> 12</span> <span class="p">{</span>
+<a name="c1-13"></a><span class="lineno"> 13</span> 	<span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+<a name="c1-14"></a><span class="lineno"> 14</span> 	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+<a name="c1-15"></a><span class="lineno"> 15</span> 	<span class="k">struct</span> <span class="n">cache_entry</span> <span class="o">*</span><span class="n">ce</span><span class="p">;</span>
+<a name="c1-16"></a><span class="lineno"> 16</span> 
+<a name="c1-17"></a><span class="lineno"> 17</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">S_ISDIR</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
+<a name="c1-18"></a><span class="lineno"> 18</span> 		<span class="k">return</span> <span class="n">READ_TREE_RECURSIVE</span><span class="p">;</span>
+<a name="c1-19"></a><span class="lineno"> 19</span> 
+<a name="c1-20"></a><span class="lineno"> 20</span> 	<span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">pathname</span><span class="p">);</span>
+<a name="c1-21"></a><span class="lineno"> 21</span> 	<span class="n">size</span> <span class="o">=</span> <span class="n">cache_entry_size</span><span class="p">(</span><span class="n">baselen</span> <span class="o">+</span> <span class="n">len</span><span class="p">);</span>
+<a name="c1-22"></a><span class="lineno"> 22</span> 	<span class="n">ce</span> <span class="o">=</span> <span class="n">xcalloc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+<a name="c1-23"></a><span class="lineno"> 23</span> 
+<a name="c1-24"></a><span class="lineno"> 24</span> 	<span class="n">ce</span><span class="o">-&gt;</span><span class="n">ce_mode</span> <span class="o">=</span> <span class="n">create_ce_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
+<a name="c1-25"></a><span class="lineno"> 25</span> 	<span class="n">ce</span><span class="o">-&gt;</span><span class="n">ce_flags</span> <span class="o">=</span> <span class="n">create_ce_flags</span><span class="p">(</span><span class="n">baselen</span> <span class="o">+</span> <span class="n">len</span><span class="p">,</span> <span class="n">stage</span><span class="p">);</span>
+<a name="c1-26"></a><span class="lineno"> 26</span> 	<span class="n">memcpy</span><span class="p">(</span><span class="n">ce</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">baselen</span><span class="p">);</span>
+<a name="c1-27"></a><span class="lineno"> 27</span> 	<span class="n">memcpy</span><span class="p">(</span><span class="n">ce</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">+</span> <span class="n">baselen</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">len</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<a name="c1-28"></a><span class="lineno"> 28</span> 	<span class="n">hashcpy</span><span class="p">(</span><span class="n">ce</span><span class="o">-&gt;</span><span class="n">sha1</span><span class="p">,</span> <span class="n">sha1</span><span class="p">);</span>
+<a name="c1-29"></a><span class="lineno"> 29</span> 	<span class="k">return</span> <span class="n">add_cache_entry</span><span class="p">(</span><span class="n">ce</span><span class="p">,</span> <span class="n">opt</span><span class="p">);</span>
+<a name="c1-30"></a><span class="lineno"> 30</span> <span class="p">}</span>
+<a name="c1-31"></a><span class="lineno"> 31</span> 
+<a name="c1-32"></a><span class="lineno"> 32</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">read_one_entry</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sha1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">base</span><span class="p">,</span> <span class="kt">int</span> <span class="n">baselen</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">mode</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stage</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">context</span><span class="p">)</span>
+<a name="c1-33"></a><span class="lineno"> 33</span> <span class="p">{</span>
+<a name="c1-34"></a><span class="lineno"> 34</span> 	<span class="k">return</span> <span class="n">read_one_entry_opt</span><span class="p">(</span><span class="n">sha1</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">baselen</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span>
+<a name="c1-35"></a><span class="lineno"> 35</span> 				  <span class="n">ADD_CACHE_OK_TO_ADD</span><span class="o">|</span><span class="n">ADD_CACHE_SKIP_DFCHECK</span><span class="p">);</span>
+<a name="c1-36"></a><span class="lineno"> 36</span> <span class="p">}</span>
+<a name="c1-37"></a><span class="lineno"> 37</span> 
+<a name="c1-38"></a><span class="lineno"> 38</span> <span class="cm">/*</span>
+<a name="c1-39"></a><span class="lineno"> 39</span> <span class="cm"> * This is used when the caller knows there is no existing entries at</span>
+<a name="c1-40"></a><span class="lineno"> 40</span> <span class="cm"> * the stage that will conflict with the entry being added.</span>
+<a name="c1-41"></a><span class="lineno"> 41</span> <span class="cm"> */</span>
+<a name="c1-42"></a><span class="lineno"> 42</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">read_one_entry_quick</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sha1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">base</span><span class="p">,</span> <span class="kt">int</span> <span class="n">baselen</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">mode</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stage</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">context</span><span class="p">)</span>
+<a name="c1-43"></a><span class="lineno"> 43</span> <span class="p">{</span>
+<a name="c1-44"></a><span class="lineno"> 44</span> 	<span class="k">return</span> <span class="n">read_one_entry_opt</span><span class="p">(</span><span class="n">sha1</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">baselen</span><span class="p">,</span> <span class="n">pathname</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span>
+<a name="c1-45"></a><span class="lineno"> 45</span> 				  <span class="n">ADD_CACHE_JUST_APPEND</span><span class="p">);</span>
+<a name="c1-46"></a><span class="lineno"> 46</span> <span class="p">}</span>
+<a name="c1-47"></a><span class="lineno"> 47</span> 
+<a name="c1-48"></a><span class="lineno"> 48</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">read_tree_1</span><span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="n">tree</span><span class="p">,</span> <span class="k">struct</span> <span class="n">strbuf</span> <span class="o">*</span><span class="n">base</span><span class="p">,</span>
+<a name="c1-49"></a><span class="lineno"> 49</span> 		       <span class="kt">int</span> <span class="n">stage</span><span class="p">,</span> <span class="k">struct</span> <span class="n">pathspec</span> <span class="o">*</span><span class="n">pathspec</span><span class="p">,</span>
+<a name="c1-50"></a><span class="lineno"> 50</span> 		       <span class="n">read_tree_fn_t</span> <span class="n">fn</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">context</span><span class="p">)</span>
+<a name="c1-51"></a><span class="lineno"> 51</span> <span class="p">{</span>
+<a name="c1-52"></a><span class="lineno"> 52</span> 	<span class="k">struct</span> <span class="n">tree_desc</span> <span class="n">desc</span><span class="p">;</span>
+<a name="c1-53"></a><span class="lineno"> 53</span> 	<span class="k">struct</span> <span class="n">name_entry</span> <span class="n">entry</span><span class="p">;</span>
+<a name="c1-54"></a><span class="lineno"> 54</span> 	<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">sha1</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<a name="c1-55"></a><span class="lineno"> 55</span> 	<span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="n">oldlen</span> <span class="o">=</span> <span class="n">base</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">;</span>
+<a name="c1-56"></a><span class="lineno"> 56</span> 	<span class="k">enum</span> <span class="n">interesting</span> <span class="n">retval</span> <span class="o">=</span> <span class="n">entry_not_interesting</span><span class="p">;</span>
+<a name="c1-57"></a><span class="lineno"> 57</span> 
+<a name="c1-58"></a><span class="lineno"> 58</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">parse_tree</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<a name="c1-59"></a><span class="lineno"> 59</span> 		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="c1-60"></a><span class="lineno"> 60</span> 
+<a name="c1-61"></a><span class="lineno"> 61</span> 	<span class="n">init_tree_desc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">desc</span><span class="p">,</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">);</span>
+<a name="c1-62"></a><span class="lineno"> 62</span> 
+<a name="c1-63"></a><span class="lineno"> 63</span> 	<span class="k">while</span> <span class="p">(</span><span class="n">tree_entry</span><span class="p">(</span><span class="o">&amp;</span><span class="n">desc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entry</span><span class="p">))</span> <span class="p">{</span>
+<a name="c1-64"></a><span class="lineno"> 64</span> 		<span class="k">if</span> <span class="p">(</span><span class="n">retval</span> <span class="o">!=</span> <span class="n">all_entries_interesting</span><span class="p">)</span> <span class="p">{</span>
+<a name="c1-65"></a><span class="lineno"> 65</span> 			<span class="n">retval</span> <span class="o">=</span> <span class="n">tree_entry_interesting</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pathspec</span><span class="p">);</span>
+<a name="c1-66"></a><span class="lineno"> 66</span> 			<span class="k">if</span> <span class="p">(</span><span class="n">retval</span> <span class="o">==</span> <span class="n">all_entries_not_interesting</span><span class="p">)</span>
+<a name="c1-67"></a><span class="lineno"> 67</span> 				<span class="k">break</span><span class="p">;</span>
+<a name="c1-68"></a><span class="lineno"> 68</span> 			<span class="k">if</span> <span class="p">(</span><span class="n">retval</span> <span class="o">==</span> <span class="n">entry_not_interesting</span><span class="p">)</span>
+<a name="c1-69"></a><span class="lineno"> 69</span> 				<span class="k">continue</span><span class="p">;</span>
+<a name="c1-70"></a><span class="lineno"> 70</span> 		<span class="p">}</span>
+<a name="c1-71"></a><span class="lineno"> 71</span> 
+<a name="c1-72"></a><span class="lineno"> 72</span> 		<span class="k">switch</span> <span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">sha1</span><span class="p">,</span> <span class="n">base</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">,</span> <span class="n">base</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">,</span>
+<a name="c1-73"></a><span class="lineno"> 73</span> 			   <span class="n">entry</span><span class="p">.</span><span class="n">path</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span> <span class="n">context</span><span class="p">))</span> <span class="p">{</span>
+<a name="c1-74"></a><span class="lineno"> 74</span> 		<span class="k">case</span> <span class="mi">0</span>:
+<a name="c1-75"></a><span class="lineno"> 75</span> 			<span class="k">continue</span><span class="p">;</span>
+<a name="c1-76"></a><span class="lineno"> 76</span> 		<span class="k">case</span> <span class="n">READ_TREE_RECURSIVE</span>:
+<a name="c1-77"></a><span class="lineno"> 77</span> 			<span class="k">break</span><span class="p">;</span>
+<a name="c1-78"></a><span class="lineno"> 78</span> 		<span class="nl">default:</span>
+<a name="c1-79"></a><span class="lineno"> 79</span> 			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="c1-80"></a><span class="lineno"> 80</span> 		<span class="p">}</span>
+<a name="c1-81"></a><span class="lineno"> 81</span> 
+<a name="c1-82"></a><span class="lineno"> 82</span> 		<span class="k">if</span> <span class="p">(</span><span class="n">S_ISDIR</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">mode</span><span class="p">))</span>
+<a name="c1-83"></a><span class="lineno"> 83</span> 			<span class="n">hashcpy</span><span class="p">(</span><span class="n">sha1</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">sha1</span><span class="p">);</span>
+<a name="c1-84"></a><span class="lineno"> 84</span> 		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">S_ISGITLINK</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">mode</span><span class="p">))</span> <span class="p">{</span>
+<a name="c1-85"></a><span class="lineno"> 85</span> 			<span class="k">struct</span> <span class="n">commit</span> <span class="o">*</span><span class="n">commit</span><span class="p">;</span>
+<a name="c1-86"></a><span class="lineno"> 86</span> 
+<a name="c1-87"></a><span class="lineno"> 87</span> 			<span class="n">commit</span> <span class="o">=</span> <span class="n">lookup_commit</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">sha1</span><span class="p">);</span>
+<a name="c1-88"></a><span class="lineno"> 88</span> 			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">commit</span><span class="p">)</span>
+<a name="c1-89"></a><span class="lineno"> 89</span> 				<span class="n">die</span><span class="p">(</span><span class="s">"Commit %s in submodule path %s%s not found"</span><span class="p">,</span>
+<a name="c1-90"></a><span class="lineno"> 90</span> 				    <span class="n">sha1_to_hex</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">sha1</span><span class="p">),</span>
+<a name="c1-91"></a><span class="lineno"> 91</span> 				    <span class="n">base</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">path</span><span class="p">);</span>
+<a name="c1-92"></a><span class="lineno"> 92</span> 
+<a name="c1-93"></a><span class="lineno"> 93</span> 			<span class="k">if</span> <span class="p">(</span><span class="n">parse_commit</span><span class="p">(</span><span class="n">commit</span><span class="p">))</span>
+<a name="c1-94"></a><span class="lineno"> 94</span> 				<span class="n">die</span><span class="p">(</span><span class="s">"Invalid commit %s in submodule path %s%s"</span><span class="p">,</span>
+<a name="c1-95"></a><span class="lineno"> 95</span> 				    <span class="n">sha1_to_hex</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">sha1</span><span class="p">),</span>
+<a name="c1-96"></a><span class="lineno"> 96</span> 				    <span class="n">base</span><span class="o">-&gt;</span><span class="n">buf</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">path</span><span class="p">);</span>
+<a name="c1-97"></a><span class="lineno"> 97</span> 
+<a name="c1-98"></a><span class="lineno"> 98</span> 			<span class="n">hashcpy</span><span class="p">(</span><span class="n">sha1</span><span class="p">,</span> <span class="n">commit</span><span class="o">-&gt;</span><span class="n">tree</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">sha1</span><span class="p">);</span>
+<a name="c1-99"></a><span class="lineno"> 99</span> 		<span class="p">}</span>
+<a name="c1-100"></a><span class="lineno">100</span> 		<span class="k">else</span>
+<a name="c1-101"></a><span class="lineno">101</span> 			<span class="k">continue</span><span class="p">;</span>
+<a name="c1-102"></a><span class="lineno">102</span> 
+<a name="c1-103"></a><span class="lineno">103</span> 		<span class="n">len</span> <span class="o">=</span> <span class="n">tree_entry_len</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="p">);</span>
+<a name="c1-104"></a><span class="lineno">104</span> 		<span class="n">strbuf_add</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">path</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+<a name="c1-105"></a><span class="lineno">105</span> 		<span class="n">strbuf_addch</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
+<a name="c1-106"></a><span class="lineno">106</span> 		<span class="n">retval</span> <span class="o">=</span> <span class="n">read_tree_1</span><span class="p">(</span><span class="n">lookup_tree</span><span class="p">(</span><span class="n">sha1</span><span class="p">),</span>
+<a name="c1-107"></a><span class="lineno">107</span> 				     <span class="n">base</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span> <span class="n">pathspec</span><span class="p">,</span>
+<a name="c1-108"></a><span class="lineno">108</span> 				     <span class="n">fn</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+<a name="c1-109"></a><span class="lineno">109</span> 		<span class="n">strbuf_setlen</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">oldlen</span><span class="p">);</span>
+<a name="c1-110"></a><span class="lineno">110</span> 		<span class="k">if</span> <span class="p">(</span><span class="n">retval</span><span class="p">)</span>
+<a name="c1-111"></a><span class="lineno">111</span> 			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="c1-112"></a><span class="lineno">112</span> 	<span class="p">}</span>
+<a name="c1-113"></a><span class="lineno">113</span> 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="c1-114"></a><span class="lineno">114</span> <span class="p">}</span>
+<a name="c1-115"></a><span class="lineno">115</span> 
+<a name="c1-116"></a><span class="lineno">116</span> <span class="kt">int</span> <span class="nf">read_tree_recursive</span><span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="n">tree</span><span class="p">,</span>
+<a name="c1-117"></a><span class="lineno">117</span> 			<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">base</span><span class="p">,</span> <span class="kt">int</span> <span class="n">baselen</span><span class="p">,</span>
+<a name="c1-118"></a><span class="lineno">118</span> 			<span class="kt">int</span> <span class="n">stage</span><span class="p">,</span> <span class="k">struct</span> <span class="n">pathspec</span> <span class="o">*</span><span class="n">pathspec</span><span class="p">,</span>
+<a name="c1-119"></a><span class="lineno">119</span> 			<span class="n">read_tree_fn_t</span> <span class="n">fn</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">context</span><span class="p">)</span>
+<a name="c1-120"></a><span class="lineno">120</span> <span class="p">{</span>
+<a name="c1-121"></a><span class="lineno">121</span> 	<span class="k">struct</span> <span class="n">strbuf</span> <span class="n">sb</span> <span class="o">=</span> <span class="n">STRBUF_INIT</span><span class="p">;</span>
+<a name="c1-122"></a><span class="lineno">122</span> 	<span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+<a name="c1-123"></a><span class="lineno">123</span> 
+<a name="c1-124"></a><span class="lineno">124</span> 	<span class="n">strbuf_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sb</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">baselen</span><span class="p">);</span>
+<a name="c1-125"></a><span class="lineno">125</span> 	<span class="n">ret</span> <span class="o">=</span> <span class="n">read_tree_1</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sb</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span> <span class="n">pathspec</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+<a name="c1-126"></a><span class="lineno">126</span> 	<span class="n">strbuf_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sb</span><span class="p">);</span>
+<a name="c1-127"></a><span class="lineno">127</span> 	<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<a name="c1-128"></a><span class="lineno">128</span> <span class="p">}</span>
+<a name="c1-129"></a><span class="lineno">129</span> 
+<a name="c1-130"></a><span class="lineno">130</span> <span class="k">static</span> <span class="kt">int</span> <span class="nf">cmp_cache_name_compare</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a_</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b_</span><span class="p">)</span>
+<a name="c1-131"></a><span class="lineno">131</span> <span class="p">{</span>
+<a name="c1-132"></a><span class="lineno">132</span> 	<span class="k">const</span> <span class="k">struct</span> <span class="n">cache_entry</span> <span class="o">*</span><span class="n">ce1</span><span class="p">,</span> <span class="o">*</span><span class="n">ce2</span><span class="p">;</span>
+<a name="c1-133"></a><span class="lineno">133</span> 
+<a name="c1-134"></a><span class="lineno">134</span> 	<span class="n">ce1</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="k">const</span> <span class="k">struct</span> <span class="n">cache_entry</span> <span class="o">**</span><span class="p">)</span><span class="n">a_</span><span class="p">);</span>
+<a name="c1-135"></a><span class="lineno">135</span> 	<span class="n">ce2</span> <span class="o">=</span> <span class="o">*</span><span class="p">((</span><span class="k">const</span> <span class="k">struct</span> <span class="n">cache_entry</span> <span class="o">**</span><span class="p">)</span><span class="n">b_</span><span class="p">);</span>
+<a name="c1-136"></a><span class="lineno">136</span> 	<span class="k">return</span> <span class="n">cache_name_compare</span><span class="p">(</span><span class="n">ce1</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">ce1</span><span class="o">-&gt;</span><span class="n">ce_flags</span><span class="p">,</span>
+<a name="c1-137"></a><span class="lineno">137</span> 				  <span class="n">ce2</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">ce2</span><span class="o">-&gt;</span><span class="n">ce_flags</span><span class="p">);</span>
+<a name="c1-138"></a><span class="lineno">138</span> <span class="p">}</span>
+<a name="c1-139"></a><span class="lineno">139</span> 
+<a name="c1-140"></a><span class="lineno">140</span> <span class="kt">int</span> <span class="nf">read_tree</span><span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="n">tree</span><span class="p">,</span> <span class="kt">int</span> <span class="n">stage</span><span class="p">,</span> <span class="k">struct</span> <span class="n">pathspec</span> <span class="o">*</span><span class="n">match</span><span class="p">)</span>
+<a name="c1-141"></a><span class="lineno">141</span> <span class="p">{</span>
+<a name="c1-142"></a><span class="lineno">142</span> 	<span class="n">read_tree_fn_t</span> <span class="n">fn</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="c1-143"></a><span class="lineno">143</span> 	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">err</span><span class="p">;</span>
+<a name="c1-144"></a><span class="lineno">144</span> 
+<a name="c1-145"></a><span class="lineno">145</span> 	<span class="cm">/*</span>
+<a name="c1-146"></a><span class="lineno">146</span> <span class="cm">	 * Currently the only existing callers of this function all</span>
+<a name="c1-147"></a><span class="lineno">147</span> <span class="cm">	 * call it with stage=1 and after making sure there is nothing</span>
+<a name="c1-148"></a><span class="lineno">148</span> <span class="cm">	 * at that stage; we could always use read_one_entry_quick().</span>
+<a name="c1-149"></a><span class="lineno">149</span> <span class="cm">	 *</span>
+<a name="c1-150"></a><span class="lineno">150</span> <span class="cm">	 * But when we decide to straighten out git-read-tree not to</span>
+<a name="c1-151"></a><span class="lineno">151</span> <span class="cm">	 * use unpack_trees() in some cases, this will probably start</span>
+<a name="c1-152"></a><span class="lineno">152</span> <span class="cm">	 * to matter.</span>
+<a name="c1-153"></a><span class="lineno">153</span> <span class="cm">	 */</span>
+<a name="c1-154"></a><span class="lineno">154</span> 
+<a name="c1-155"></a><span class="lineno">155</span> 	<span class="cm">/*</span>
+<a name="c1-156"></a><span class="lineno">156</span> <span class="cm">	 * See if we have cache entry at the stage.  If so,</span>
+<a name="c1-157"></a><span class="lineno">157</span> <span class="cm">	 * do it the original slow way, otherwise, append and then</span>
+<a name="c1-158"></a><span class="lineno">158</span> <span class="cm">	 * sort at the end.</span>
+<a name="c1-159"></a><span class="lineno">159</span> <span class="cm">	 */</span>
+<a name="c1-160"></a><span class="lineno">160</span> 	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">!</span><span class="n">fn</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">active_nr</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a name="c1-161"></a><span class="lineno">161</span> 		<span class="k">struct</span> <span class="n">cache_entry</span> <span class="o">*</span><span class="n">ce</span> <span class="o">=</span> <span class="n">active_cache</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a name="c1-162"></a><span class="lineno">162</span> 		<span class="k">if</span> <span class="p">(</span><span class="n">ce_stage</span><span class="p">(</span><span class="n">ce</span><span class="p">)</span> <span class="o">==</span> <span class="n">stage</span><span class="p">)</span>
+<a name="c1-163"></a><span class="lineno">163</span> 			<span class="n">fn</span> <span class="o">=</span> <span class="n">read_one_entry</span><span class="p">;</span>
+<a name="c1-164"></a><span class="lineno">164</span> 	<span class="p">}</span>
+<a name="c1-165"></a><span class="lineno">165</span> 
+<a name="c1-166"></a><span class="lineno">166</span> 	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fn</span><span class="p">)</span>
+<a name="c1-167"></a><span class="lineno">167</span> 		<span class="n">fn</span> <span class="o">=</span> <span class="n">read_one_entry_quick</span><span class="p">;</span>
+<a name="c1-168"></a><span class="lineno">168</span> 	<span class="n">err</span> <span class="o">=</span> <span class="n">read_tree_recursive</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<a name="c1-169"></a><span class="lineno">169</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">fn</span> <span class="o">==</span> <span class="n">read_one_entry</span> <span class="o">||</span> <span class="n">err</span><span class="p">)</span>
+<a name="c1-170"></a><span class="lineno">170</span> 		<span class="k">return</span> <span class="n">err</span><span class="p">;</span>
+<a name="c1-171"></a><span class="lineno">171</span> 
+<a name="c1-172"></a><span class="lineno">172</span> 	<span class="cm">/*</span>
+<a name="c1-173"></a><span class="lineno">173</span> <span class="cm">	 * Sort the cache entry -- we need to nuke the cache tree, though.</span>
+<a name="c1-174"></a><span class="lineno">174</span> <span class="cm">	 */</span>
+<a name="c1-175"></a><span class="lineno">175</span> 	<span class="n">cache_tree_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">active_cache_tree</span><span class="p">);</span>
+<a name="c1-176"></a><span class="lineno">176</span> 	<span class="n">qsort</span><span class="p">(</span><span class="n">active_cache</span><span class="p">,</span> <span class="n">active_nr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">active_cache</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+<a name="c1-177"></a><span class="lineno">177</span> 	      <span class="n">cmp_cache_name_compare</span><span class="p">);</span>
+<a name="c1-178"></a><span class="lineno">178</span> 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="c1-179"></a><span class="lineno">179</span> <span class="p">}</span>
+<a name="c1-180"></a><span class="lineno">180</span> 
+<a name="c1-181"></a><span class="lineno">181</span> <span class="hll"><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="nf">lookup_tree</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sha1</span><span class="p">)</span>
+</span><a name="c1-182"></a><span class="lineno">182</span> <span class="hll"><span class="p">{</span>
+</span><a name="c1-183"></a><span class="lineno">183</span> <span class="hll">	<span class="k">struct</span> <span class="n">object</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="n">lookup_object</span><span class="p">(</span><span class="n">sha1</span><span class="p">);</span>
+</span><a name="c1-184"></a><span class="lineno">184</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="p">)</span>
+</span><a name="c1-185"></a><span class="lineno">185</span> <span class="hll">		<span class="k">return</span> <span class="n">create_object</span><span class="p">(</span><span class="n">sha1</span><span class="p">,</span> <span class="n">OBJ_TREE</span><span class="p">,</span> <span class="n">alloc_tree_node</span><span class="p">());</span>
+</span><a name="c1-186"></a><span class="lineno">186</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">)</span>
+</span><a name="c1-187"></a><span class="lineno">187</span> <span class="hll">		<span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">OBJ_TREE</span><span class="p">;</span>
+</span><a name="c1-188"></a><span class="lineno">188</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">OBJ_TREE</span><span class="p">)</span> <span class="p">{</span>
+</span><a name="c1-189"></a><span class="lineno">189</span> <span class="hll">		<span class="n">error</span><span class="p">(</span><span class="s">"Object %s is a %s, not a tree"</span><span class="p">,</span>
+</span><a name="c1-190"></a><span class="lineno">190</span> <span class="hll">		      <span class="n">sha1_to_hex</span><span class="p">(</span><span class="n">sha1</span><span class="p">),</span> <span class="kr">typename</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">));</span>
+</span><a name="c1-191"></a><span class="lineno">191</span> <span class="hll">		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span><a name="c1-192"></a><span class="lineno">192</span> <span class="hll">	<span class="p">}</span>
+</span><a name="c1-193"></a><span class="lineno">193</span> <span class="hll">	<span class="k">return</span> <span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="p">)</span> <span class="n">obj</span><span class="p">;</span>
+</span><a name="c1-194"></a><span class="lineno">194</span> <span class="hll"><span class="p">}</span>
+</span><a name="c1-195"></a><span class="lineno">195</span> <span class="hll">
+</span><a name="c1-196"></a><span class="lineno">196</span> <span class="hll"><span class="kt">int</span> <span class="nf">parse_tree_buffer</span><span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="n">item</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buffer</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">size</span><span class="p">)</span>
+</span><a name="c1-197"></a><span class="lineno">197</span> <span class="hll"><span class="p">{</span>
+</span><a name="c1-198"></a><span class="lineno">198</span> <span class="hll">	<span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">parsed</span><span class="p">)</span>
+</span><a name="c1-199"></a><span class="lineno">199</span> 		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="c1-200"></a><span class="lineno">200</span> 	<span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">parsed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<a name="c1-201"></a><span class="lineno">201</span> 	<span class="n">item</span><span class="o">-&gt;</span><span class="n">buffer</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">;</span>
+<a name="c1-202"></a><span class="lineno">202</span> 	<span class="n">item</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+<a name="c1-203"></a><span class="lineno">203</span> 
+<a name="c1-204"></a><span class="lineno">204</span> 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="c1-205"></a><span class="lineno">205</span> <span class="p">}</span>
+<a name="c1-206"></a><span class="lineno">206</span> 
+<a name="c1-207"></a><span class="lineno">207</span> <span class="kt">int</span> <span class="nf">parse_tree</span><span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="n">item</span><span class="p">)</span>
+<a name="c1-208"></a><span class="lineno">208</span> <span class="p">{</span>
+<a name="c1-209"></a><span class="lineno">209</span> 	 <span class="k">enum</span> <span class="n">object_type</span> <span class="n">type</span><span class="p">;</span>
+<a name="c1-210"></a><span class="lineno">210</span> 	 <span class="kt">void</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
+<a name="c1-211"></a><span class="lineno">211</span> 	 <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">size</span><span class="p">;</span>
+<a name="c1-212"></a><span class="lineno">212</span> 
+<a name="c1-213"></a><span class="lineno">213</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">parsed</span><span class="p">)</span>
+<a name="c1-214"></a><span class="lineno">214</span> 		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="c1-215"></a><span class="lineno">215</span> 	<span class="n">buffer</span> <span class="o">=</span> <span class="n">read_sha1_file</span><span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">sha1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">type</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+<a name="c1-216"></a><span class="lineno">216</span> 	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">buffer</span><span class="p">)</span>
+<a name="c1-217"></a><span class="lineno">217</span> 		<span class="k">return</span> <span class="n">error</span><span class="p">(</span><span class="s">"Could not read %s"</span><span class="p">,</span>
+<a name="c1-218"></a><span class="lineno">218</span> 			     <span class="n">sha1_to_hex</span><span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">sha1</span><span class="p">));</span>
+<a name="c1-219"></a><span class="lineno">219</span> 	<span class="k">if</span> <span class="p">(</span><span class="n">type</span> <span class="o">!=</span> <span class="n">OBJ_TREE</span><span class="p">)</span> <span class="p">{</span>
+<a name="c1-220"></a><span class="lineno">220</span> 		<span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+<a name="c1-221"></a><span class="lineno">221</span> 		<span class="k">return</span> <span class="n">error</span><span class="p">(</span><span class="s">"Object %s not a tree"</span><span class="p">,</span>
+<a name="c1-222"></a><span class="lineno">222</span> 			     <span class="n">sha1_to_hex</span><span class="p">(</span><span class="n">item</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">sha1</span><span class="p">));</span>
+<a name="c1-223"></a><span class="lineno">223</span> 	<span class="p">}</span>
+<a name="c1-224"></a><span class="lineno">224</span> 	<span class="k">return</span> <span class="n">parse_tree_buffer</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+<a name="c1-225"></a><span class="lineno">225</span> <span class="p">}</span>
+<a name="c1-226"></a><span class="lineno">226</span> 
+<a name="c1-227"></a><span class="lineno">227</span> <span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="nf">parse_tree_indirect</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sha1</span><span class="p">)</span>
+<a name="c1-228"></a><span class="lineno">228</span> <span class="p">{</span>
+<a name="c1-229"></a><span class="lineno">229</span> 	<span class="k">struct</span> <span class="n">object</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="n">parse_object</span><span class="p">(</span><span class="n">sha1</span><span class="p">);</span>
+<a name="c1-230"></a><span class="lineno">230</span> 	<span class="k">do</span> <span class="p">{</span>
+<a name="c1-231"></a><span class="lineno">231</span> 		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="p">)</span>
+<a name="c1-232"></a><span class="lineno">232</span> 			<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="c1-233"></a><span class="lineno">233</span> 		<span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">OBJ_TREE</span><span class="p">)</span>
+<a name="c1-234"></a><span class="lineno">234</span> 			<span class="k">return</span> <span class="p">(</span><span class="k">struct</span> <span class="n">tree</span> <span class="o">*</span><span class="p">)</span> <span class="n">obj</span><span class="p">;</span>
+<a name="c1-235"></a><span class="lineno">235</span> 		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">OBJ_COMMIT</span><span class="p">)</span>
+<a name="c1-236"></a><span class="lineno">236</span> 			<span class="n">obj</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(((</span><span class="k">struct</span> <span class="n">commit</span> <span class="o">*</span><span class="p">)</span> <span class="n">obj</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">tree</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">);</span>
+<a name="c1-237"></a><span class="lineno">237</span> 		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">OBJ_TAG</span><span class="p">)</span>
+<a name="c1-238"></a><span class="lineno">238</span> 			<span class="n">obj</span> <span class="o">=</span> <span class="p">((</span><span class="k">struct</span> <span class="n">tag</span> <span class="o">*</span><span class="p">)</span> <span class="n">obj</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">tagged</span><span class="p">;</span>
+<a name="c1-239"></a><span class="lineno">239</span> 		<span class="k">else</span>
+<a name="c1-240"></a><span class="lineno">240</span> 			<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<a name="c1-241"></a><span class="lineno">241</span> 		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">parsed</span><span class="p">)</span>
+<a name="c1-242"></a><span class="lineno">242</span> 			<span class="n">parse_object</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">sha1</span><span class="p">);</span>
+<a name="c1-243"></a><span class="lineno">243</span> 	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a name="c1-244"></a><span class="lineno">244</span> <span class="p">}</span>
+</pre></div>
+
+                </div>
+                <div class="scrollable-sections-bottom-shadow" style="opacity: 5.5;"></div>
+            </div>
+        </div>
+        
+    </div>
+
+
+</body></html>

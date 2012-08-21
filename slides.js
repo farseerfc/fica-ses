@@ -246,6 +246,16 @@ function nextSlide() {
   }
 };
 
+function firstSlide(){
+  curSlide=0;
+  updateSlides();
+}
+
+function lastSlide(){
+  curSlide=slideEls.length - 1;
+  updateSlides();
+}
+
 /* Slide events */
 
 function triggerEnterEvent(no) {
@@ -355,7 +365,7 @@ function enableSlideFrames(no) {
 };
 
 function disableFrame(frame) {
-  frame.src = 'about:blank';
+  //frame.src = 'about:blank';
 };
 
 function enableFrame(frame) {
@@ -371,6 +381,7 @@ function setupFrames() {
   for (var i = 0, frame; frame = frames[i]; i++) {
     frame._src = frame.src;
     disableFrame(frame);
+    enableSlideFrames(i);
   }
   
   enableSlideFrames(curSlide);
@@ -515,6 +526,12 @@ function handleBodyKeyDown(event) {
         prevSlide();
       }
       event.preventDefault();
+      break;
+    case 36: //home
+      firstSlide();
+      break;
+    case 35:
+      lastSlide();
       break;
   }
 };
