@@ -68,9 +68,8 @@
 .highlight .vg { color: #000000 } /* Name.Variable.Global */
 .highlight .vi { color: #000000 } /* Name.Variable.Instance */
 .highlight .il { color: #0000cf; font-weight: bold } /* Literal.Number.Integer.Long */
-.highlight {
-    font-size: 8pt;
-    white-space: nowrap;
+pre{
+    font-size: 13pt!important;
 }
 .codebox {
     width: 50%;
