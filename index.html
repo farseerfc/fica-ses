@@ -81,7 +81,7 @@
 	    	$("iframe",$(frame)).each(function (index,ele){
 	    		setTimeout(function(){
 					ele.src=ele.src;
-				},100);
+				},1000);
 			});
 			$("script",$(frame)).each(function (index,ele){
 				eval(ele.text);
