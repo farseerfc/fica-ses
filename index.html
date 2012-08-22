@@ -79,7 +79,9 @@
 
 	    var reloadFrame=function(frame){
 	    	$("iframe",$(frame)).each(function (index,ele){
-				ele.src=ele.src;
+	    		setTimeout(function(){
+					ele.src=ele.src;
+				},100);
 			});
 			$("script",$(frame)).each(function (index,ele){
 				eval(ele.text);
@@ -107,7 +109,7 @@
 						機械学習に基づく有用なコードクローンの自動特定手法<br/>
 						<small>Filtering Clones for Individual User Based on Machine Learning Analysis</small>
 					</h3>
-					<h4 style="font-size:35px;"><span class="red">楊 嘉晨</span>, 堀田 圭佑, 肥後 芳樹, 井垣 宏, 楠本 真二</h3>
+					<h4 style="font-size:33px;"><span class="red">楊 嘉晨</span>, 堀田 圭佑, 肥後 芳樹, 井垣 宏, 楠本 真二</h3>
 					大阪大学大学院情報科学研究科<br/>
 					Graduate School of Information Science and Technology<br/>
 					Osaka University<br/>
@@ -159,17 +161,17 @@
 					<iframe width="800px" height="400px" src="include/motivating.html" frameborder="0"></iframe>
 				</article>
 				<article onslideenter="reloadFrame(this)">
-					<h3>Example most surveyees <i class="icon-user icon-large"></i> thought 
+					<h3>Example most <i class="icon-user icon-large"></i> thought 
 						<span class="blue"><i class="icon-check icon-large"></i> interesting</span> <h3>
 					<iframe width="800px" height="500px" src="include/mostblue.html" frameborder="0"></iframe>
 				</article>
 				<article onslideenter="reloadFrame(this)">
-					<h3>Example most surveyees <i class="icon-user icon-large"></i> thought 
+					<h3>Example most <i class="icon-user icon-large"></i> thought 
 						<span class="red"><i class="icon-check-empty icon-large"></i> un-interesting</span> </h3>
 					<iframe width="800px" height="500px" src="include/mostred.html" frameborder="0"></iframe>
 				</article>
 				<article onslideenter="reloadFrame(this)">
-					<h3>Example surveyees <i class="icon-user icon-large"></i> 
+					<h3>Example <i class="icon-user icon-large"></i> 
 						<span class="green"> disagreed</span> with each other </h3>
 					<iframe width="800px" height="500px" src="include/mostmid.html" frameborder="0"></iframe>
 				</article>
@@ -220,7 +222,8 @@
 					</article>
 
 					<article onslideenter="reloadFrame(this)">
-						<h3>Terms Mapping between Code Clone and Machine Learning</h3>
+						<h3>Terms Mapping</h3>
+						<h4>between Code Clone and Machine Learning</h4>
 						<table>
 							<tr>
 								<th>Code Clone</th>
