@@ -248,7 +248,7 @@
 					<article onslideenter="reloadFrame(this)">
 						
 						<h3>Tokenization</h3>
-						<pre><code contenteditable>
+						<pre><code >
 struct blob *lookup_blob(const unsigned char *sha1)
 {
 	struct object *obj = lookup_object(sha1);
@@ -267,7 +267,7 @@ struct blob *lookup_blob(const unsigned char *sha1)
 					</article>
 					<article onslideenter="reloadFrame(this)">
 						<h4>Token sequence</h4>
-						<pre><code contenteditable>
+						<pre><code >
 STRUCT ID TIMES ID LPAREN CONST ID ID TIMES ID RPAREN 
 LBRACE 
 	STRUCT ID TIMES ID EQUALS ID LPAREN ID RPAREN SEMI
@@ -289,7 +289,7 @@ RBRACE
 
 					<article onslideenter="reloadFrame(this)">
 						<h3>N-gram of tokens (N=3)</h3>
-						<pre><code contenteditable>
+						<pre><code >
 STRUCT ID TIMES 
        ID TIMES ID 
           TIMES ID LPAREN 
@@ -366,9 +366,9 @@ tfidf(t, d, D) = tf(t, d) \times idf(t, D)
 sim(a, b, D) = \overrightarrow{tfidf(a, D)} \cdot \overrightarrow{tfidf(b, D)} \\
 
 nsim(a, b, D) = \left\{
-\begin{array}{cl}
-0 &amp;, sim(a, b, D) = 0 \\
-\frac{sim(a, b, D)}{|\overrightarrow{tfidf(a, D)}|  \cdot |\overrightarrow{tfidf(b, D)}| } &amp;, \mbox{otherwise}
+\begin{array}{c}
+0 , sim(a, b, D) = 0 \\
+\frac{sim(a, b, D)}{|\overrightarrow{tfidf(a, D)}|  \cdot |\overrightarrow{tfidf(b, D)}| } , \mbox{otherwise}
 \end{array} \right.
 \]
 							</p>
@@ -838,9 +838,22 @@ fdg("include/e2fsprogs-fdg.json","#e2fsprogs-target2",300 , (Math.pow(10,100/100
 				</article>
 
 				<article onslideenter="reloadFrame(this)">
-					<h1>Thank you</h1>
+					<h2>Conclusion</h2>
+					<ul class="build">
+						<li>We have shown that users of CDT may have different opinions on whether a code clone is <span class="red">useful</span>
+						    or <span class="red">interesting</span>. </li>
+						<li>We proposed a method to predict the <span class="blue">interesting-ness</span> based on machine learning algorithms. </li>
+						<li>We make use of a virtualization called <span class="red">Force-Directed Graph</span> to illustrate similarity among
+							clonesets. </li>
+						<li>We developed a web-based system called <span class="red">Fica</span> to aid the machine learning process. </li>
+						<li>The <span class="red">Fica</span> system showed more than 70% accuracy in average and more than 90% accuracy in particular
+							user and project. </li>
+					</ul>
 				</article>
 			
+			<article onslideenter="reloadFrame(this)">
+				<h1>Thank you</h1>
+			</article>
 		</section>
 
 		<script type="text/javascript">
