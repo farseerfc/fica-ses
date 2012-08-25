@@ -1,0 +1,13 @@
+﻿Fica workflow multiple graph
+
+说明实验的顺序
+
+Fica的选择过程中的图也表示，Fica的介绍放到Individual Prediction前面。
+
+说明实验的顺序的图。
+
+Survey Result，说明红色和蓝色的含义
+
+Thank you 日本語でも大丈夫
+
+Motivating Example -> Pilot Study

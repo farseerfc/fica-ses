@@ -138,6 +138,8 @@
 					<h1>Motivating Example</h1>
 					<p></p>
 					<div class="build">
+						<p>Code clone detectors can detect a long list of clones.</p>
+						<p>But they are not all interesting or useful to everyone ...</p>
 						<p>
 							We made a <b class="green">survey</b> on some 
 							<b>students <i class="icon-user icon-large"></i></b>.
@@ -163,16 +165,26 @@
 				<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
 					<h3>Example most <i class="icon-user icon-large"></i> thought 
 						<span class="blue"><i class="icon-check icon-large"></i> interesting</span> <h3>
+						<div class="build">
+							<p>These two clones are from a complete function.</p>
+						</div>
 					<iframe width="1300px" height="800px" src="include/mostblue.html" frameborder="0"></iframe>
 				</article>
 				<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
 					<h3>Example most <i class="icon-user icon-large"></i> thought 
 						<span class="red"><i class="icon-check-empty icon-large"></i> un-interesting</span> </h3>
+						<div class="build">
+							<p>These two clones are doing sequential simple tasks.</p>
+						</div>
 					<iframe width="1300px" height="800px" src="include/mostred.html" frameborder="0"></iframe>
 				</article>
 				<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
 					<h3>Example <i class="icon-user icon-large"></i> 
 						<span class="green"> disagreed</span> with each other </h3>
+						<div class="build">
+							<p>These two clones are <span class="blue">doing same thing</span>, 
+								as <span class="red">a fragment of large function</span>.</p>
+						</div>
 					<iframe width="1300px" height="800px" src="include/mostmid.html" frameborder="0"></iframe>
 				</article>
 
@@ -185,8 +197,7 @@
 					<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
 						<h2>Machine Learning Algorithm</h2>
 						<ol class="build">
-							<li>Tokenization</li>
-							<li>Divide into N-grams</li>
+							<li>Tokenize the source code and divide into N-grams</li>
 							<li>Calculate \(tf-idf\) vector for grams in clonesets</li>
 							<li>Calculate similarity between each pair of clonesets 
 								in training-set and evaluation-set based on their 
@@ -489,7 +500,7 @@ poss(d, M) = \left\{
 				
 					<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
 						<h3>Prediction Accuracy of All Projects</h3>
-						<div id="hc-all" style="width: 800px; height: 500px;  margin: 0 auto"></div>
+						<div id="hc-all" style="width: 800px; height: 600px;  margin: 0 auto"></div>
 
 <script language="javascript" type="text/javascript">
     hchart = function() {
@@ -502,15 +513,27 @@ poss(d, M) = \left\{
             },
             title: {
                 text: 'All Projects',
+                
+                style:{fontSize: '24'},
                 x: -20 //center
+
             },
             xAxis: {
                 title: {
                     text: 'Percentage of Training Set (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
                 },
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
                 labels:{
-                    step: 3,
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
+                    step: 10,
                     //rotation: -15,
                 },
                 min: 0,
@@ -518,13 +541,26 @@ poss(d, M) = \left\{
             },
             yAxis: {
                 title: {
-                    text: 'Accuracy  (%)'
+                    text: 'Accuracy  (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
+                },
+                                labels:{
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0,
+                max: 100,
             },
             tooltip: {
                 formatter: function() {
@@ -538,6 +574,9 @@ poss(d, M) = \left\{
                 verticalAlign: 'top',
                 x: -10,
                 y: 100,
+                                itemStyle: {
+                    fontSize: '18px',
+                },
                 borderWidth: 0
             },
 
@@ -548,7 +587,7 @@ poss(d, M) = \left\{
 </script>
 					</article>
 					<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
-						<div id="hc-4f1f687db61c5411ac000671" style="width: 800px; height: 500px;  margin: 0 auto"></div>
+						<div id="hc-4f1f687db61c5411ac000671" style="width: 800px; height: 600px;  margin: 0 auto"></div>
 
 <script language="javascript" type="text/javascript">
     hchart = function() {
@@ -561,15 +600,26 @@ poss(d, M) = \left\{
             },
             title: {
                 text: 'survey git-v1.7.9-rc1',
+                
+                style:{fontSize: '24'},
                 x: -20 //center
             },
             xAxis: {
                 title: {
                     text: 'Percentage of Training Set (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
                 },
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
                 labels:{
-                    step: 3,
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
+                    step: 10,
                     //rotation: -15,
                 },
                 min: 0,
@@ -577,13 +627,26 @@ poss(d, M) = \left\{
             },
             yAxis: {
                 title: {
-                    text: 'Accuracy  (%)'
+                    text: 'Accuracy  (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
+                },
+                                                labels:{
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0,
+                max: 100,
             },
             tooltip: {
                 formatter: function() {
@@ -597,6 +660,9 @@ poss(d, M) = \left\{
                 verticalAlign: 'top',
                 x: -10,
                 y: 100,
+                                itemStyle: {
+                    fontSize: '18px',
+                },
                 borderWidth: 0
             },
 
@@ -615,7 +681,7 @@ fdg("include/git-fdg.json","#git-target2",300 , (Math.pow(10,100/1000)-1)/9);
 
 					</article>
 					<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
-						<div id="hc-4f1f6895b61c5411ac0007a9" style="width: 800px; height: 500px;  margin: 0 auto"></div>
+						<div id="hc-4f1f6895b61c5411ac0007a9" style="width: 800px; height: 600px;  margin: 0 auto"></div>
 
 <script language="javascript" type="text/javascript">
     hchart = function() {
@@ -628,15 +694,26 @@ fdg("include/git-fdg.json","#git-target2",300 , (Math.pow(10,100/1000)-1)/9);
             },
             title: {
                 text: 'survey xz-5.0.3',
+                
+                style:{fontSize: '24'},
                 x: -20 //center
             },
             xAxis: {
                 title: {
                     text: 'Percentage of Training Set (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
                 },
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
                 labels:{
-                    step: 3,
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
+                    step: 10,
                     //rotation: -15,
                 },
                 min: 0,
@@ -644,13 +721,26 @@ fdg("include/git-fdg.json","#git-target2",300 , (Math.pow(10,100/1000)-1)/9);
             },
             yAxis: {
                 title: {
-                    text: 'Accuracy  (%)'
+                    text: 'Accuracy  (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
+                },
+                                                labels:{
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0,
+                max: 100,
             },
             tooltip: {
                 formatter: function() {
@@ -664,6 +754,9 @@ fdg("include/git-fdg.json","#git-target2",300 , (Math.pow(10,100/1000)-1)/9);
                 verticalAlign: 'top',
                 x: -10,
                 y: 100,
+                                itemStyle: {
+                    fontSize: '18px',
+                },
                 borderWidth: 0
             },
 
@@ -680,7 +773,7 @@ fdg("include/xz-fdg.json","#xz-target2",300 , (Math.pow(10,100/1000)-1)/9);
 </script>
 					</article>
 					<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
-						<div id="hc-4f1f68ccb61c5411ac0009dd" style="width: 800px; height: 500px;  margin: 0 auto"></div>
+						<div id="hc-4f1f68ccb61c5411ac0009dd" style="width: 800px; height: 600px;  margin: 0 auto"></div>
 
 <script language="javascript" type="text/javascript">
     hchart = function() {
@@ -693,15 +786,26 @@ fdg("include/xz-fdg.json","#xz-target2",300 , (Math.pow(10,100/1000)-1)/9);
             },
             title: {
                 text: 'survey bash-4.2',
+                
+                style:{fontSize: '24'},
                 x: -20 //center
             },
             xAxis: {
                 title: {
                     text: 'Percentage of Training Set (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
                 },
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
                 labels:{
-                    step: 3,
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
+                    step: 10,
                     //rotation: -15,
                 },
                 min: 0,
@@ -709,13 +813,26 @@ fdg("include/xz-fdg.json","#xz-target2",300 , (Math.pow(10,100/1000)-1)/9);
             },
             yAxis: {
                 title: {
-                    text: 'Accuracy  (%)'
+                    text: 'Accuracy  (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
+                },
+                                                labels:{
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0,
+                max: 100,
             },
             tooltip: {
                 formatter: function() {
@@ -729,6 +846,9 @@ fdg("include/xz-fdg.json","#xz-target2",300 , (Math.pow(10,100/1000)-1)/9);
                 verticalAlign: 'top',
                 x: -10,
                 y: 100,
+                                itemStyle: {
+                    fontSize: '18px',
+                },
                 borderWidth: 0
             },
 
@@ -745,7 +865,7 @@ fdg("include/bash-fdg.json","#bash-target2",300 , (Math.pow(10,100/1000)-1)/9);
 </script>
 					</article>
 					<article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
-						<div id="hc-4f1f68fdb61c5411ac000c7f" style="width: 800px; height: 500px;  margin: 0 auto"></div>
+						<div id="hc-4f1f68fdb61c5411ac000c7f" style="width: 800px; height: 600px;  margin: 0 auto"></div>
 
 <script language="javascript" type="text/javascript">
     hchart = function() {
@@ -758,15 +878,26 @@ fdg("include/bash-fdg.json","#bash-target2",300 , (Math.pow(10,100/1000)-1)/9);
             },
             title: {
                 text: 'survey e2fsprogs-1.41.14',
+                
+                style:{fontSize: '24'},
                 x: -20 //center
             },
             xAxis: {
                 title: {
                     text: 'Percentage of Training Set (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
                 },
                 categories: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
                 labels:{
-                    step: 3,
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
+                    step: 10,
                     //rotation: -15,
                 },
                 min: 0,
@@ -774,13 +905,26 @@ fdg("include/bash-fdg.json","#bash-target2",300 , (Math.pow(10,100/1000)-1)/9);
             },
             yAxis: {
                 title: {
-                    text: 'Accuracy  (%)'
+                    text: 'Accuracy  (%)',
+                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
+                },
+                                                labels:{
+                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0,
+                max: 100,
             },
             tooltip: {
                 formatter: function() {
@@ -794,6 +938,9 @@ fdg("include/bash-fdg.json","#bash-target2",300 , (Math.pow(10,100/1000)-1)/9);
                 verticalAlign: 'top',
                 x: -10,
                 y: 100,
+                itemStyle: {
+                    fontSize: '18px',
+                },
                 borderWidth: 0
             },
 
