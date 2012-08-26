@@ -18,10 +18,17 @@ chart = new Highcharts.Chart({
 			zoomType: 'x',
 		},
 		title: {
-			text: 'Timestamps of Marks by Users'
+			text: 'Timestamps of Marks by Users',
+                style:{fontSize: '24'},
 		},
 		xAxis: {
 			type: 'datetime',
+			labels:{
+				                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
+			},
 			dateTimeLabelFormats: { // don't display the dummy year
 				month: '%e. %b',
 				year: '%b'
@@ -29,10 +36,19 @@ chart = new Highcharts.Chart({
 		},
 		yAxis: {
 			title: {
-				text: 'User'
+				text: 'User',
+				                               style: {
+                        color: '#000',
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    },
 			},
 			labels: {
-				formatter: function(){return " ABCDEFGHIJKLMNOPQ"[this.value];}
+				formatter: function(){return " ABCDEFGH   "[this.value];},
+				                	                 style: {
+                        color: '#000',
+                        fontSize: '18px',
+                    },
 			},
 			min: 0,
 			max: 8.1,
