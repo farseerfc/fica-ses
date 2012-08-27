@@ -1,0 +1,1505 @@
+%\documentclass[CJK]{beamer}  
+%\usetheme[left,width=5em]{Goettingen}
+\usepackage{xeCJK}
+\makeatletter
+\newcommand{\newinfo}[1]{}
+\makeatother
+
+\usepackage{fontspec,xunicode,xltxtra,listings}
+
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usetikzlibrary{shapes,arrows,shadows,mindmap,backgrounds}
+
+\setbeamercovered{transparent}
+\setbeamertemplate{items}[circle]
+\renewcommand{\figurename}{図}
+\newtheorem{definationfc}{定義}
+
+\usepackage[overlap,CJK]{ruby}
+\usepackage{multicol}
+\usepackage[sort&compress]{natbib}
+%\usepackage{chapterbib}
+\usepackage{multirow,tabularx}
+
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}} 
+}
+
+\newcommand{\fcshadow}[1]{%
+\tikz[baseline]\path[anchor=base]
+node[fill opacity=0.1] at (0.05em,-0.05em) {#1}
+node[fill opacity=0.1] at (0.03em,-0.05em) {#1}
+node[fill opacity=0.1] at (0.05em,-0.03em) {#1}
+node[fill opacity=0.1] at (0.05em,-0.07em) {#1}
+node[fill opacity=0.1] at (0.07em,-0.05em) {#1}
+node at (0pt,0pt) {#1};}
+
+
+\setCJKmainfont{MS PGothic}
+\setCJKsansfont{Meiryo UI} %[Mapping=tex-text]
+\setCJKmonofont{Courier New}
+%\usefonttheme{serif}
+\setmainfont{Droid Serif}
+\setsansfont{Droid Sans} %[Mapping=tex-text]
+\setmonofont{Droid Sans Mono}
+
+\def\beamer@linkspace#1{%
+  \begin{pgfpicture}{0pt}{-1.5pt}{#1}{5.5pt}
+    \pgfsetfillopacity{0}
+    \pgftext[x=0pt,y=-1.5pt]{.}
+    \pgftext[x=#1,y=5.5pt]{.}
+  \end{pgfpicture}}
+
+
+\lstset{tabsize=4, %
+  language=C, 
+  escapechar=@,
+  frame=shadowbox, commentstyle=\color{red!50!green!50!blue!50},
+  rulesepcolor=\color{red!20!green!20!blue!20},
+  keywordstyle=\color{blue!90}\bfseries, 
+  showstringspaces=false,
+  stringstyle=\ttfamily, 
+  keepspaces=true, %
+  breakindent=22pt, %
+  numbers=left,%
+  stepnumber=1,%
+  numberstyle=\tiny, %
+  basicstyle=\tiny, %
+  showspaces=false, %
+  flexiblecolumns=true, %
+  breaklines=true, %
+  breakautoindent=true,%
+  breakindent=4em, %
+  aboveskip=0.5em, %
+  fontadjust,
+  captionpos=t,
+  framextopmargin=2pt,framexbottommargin=2pt,abovecaptionskip=-3pt,belowcaptionskip=3pt,
+  xleftmargin=3em,xrightmargin=1em, % 
+  texcl=true,
+  extendedchars=false,columns=flexible,mathescape=true,
+  numbersep=0.5em,
+}
+
+\newcommand{\upcite}[1]{\textsuperscript{\citep{#1}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[Active Refinement of Clone Anomaly Reports]{Active Refinement of Clone Anomaly Reports}
+
+\subtitle[MD 輪講]{MD 輪講}
+
+\author[大阪大学大学院CS専攻\quad{}楊　嘉晨]{修士課程1年\quad{}楊　嘉晨}
+\institute[楠本研]{大阪大学大学院 コンピュータサイエンス専攻 楠本研究室}
+\date{2012年7月4日（火）}
+
+\mode<article>{\providecommand{\imageheight}{0.2\textheight}}
+\mode<presentation>{\providecommand{\imageheight}{0.4\textheight}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document} 
+
+\mode<presentation>{
+
+\providecommand{\newblock}{\\}
+\providecommand{\toprule}{\hline}
+\providecommand{\midrule}{\hline}
+\providecommand{\bottomrule}{\hline}
+\providecommand{\itemtitle}[1]{\item \alert{#1} \quad{} }
+}
+
+\mode<article>{
+\renewenvironment{columns}{\begin{multicols}{2}}{\end{multicols}\\}
+\renewenvironment{column}[1]{}{}
+}
+
+\XeTeXlinebreaklocale "jp"  
+\XeTeXlinebreakskip = 0pt plus 1pt 
+
+\frame{\titlepage} 
+\mode<article>{\maketitle}
+
+%\begin{frame}<trans|beamer>[shrink=10]{目次}
+%\tableofcontents[sectionstyle=show/hide,subsectionstyle=hide,subsubsectionstyle=hide] 
+%\end{frame}
+
+
+\AtBeginSection[]{
+  \begin{frame}<trans|beamer>
+\begin{center}
+\Huge\insertsection
+%\tableofcontents[sectionstyle=show/hide,subsectionstyle=show/shaded/hide]
+\end{center}
+  \end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{出典 Publication}
+\subsection{出典 Publication}
+\begin{frame}{出典}{Publication}
+Active Refinement of Clone Anomaly Reports
+\begin{itemize}
+\item ICSE 2012
+\item Similarity and Classification
+\end{itemize}
+Lucia, David Lo, Lingxiao Jiang, and Aditya Budi
+\begin{itemize}
+\item Singapore Management University
+\end{itemize}
+11 pages
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{背景 Introduction}
+\subsection{背景 Introduction}
+\begin{frame}{背景}{Introduction}
+
+\begin{columns}
+\begin{column}{22em}
+コードクローンはソフトウェア保守に対して悪い影響
+\vskip1em
+\textcolor{orange}{不具合(anomaly)}があるコードクローンに
+\textcolor{blue}{バグを含む}可能性が高い
+\end{column}
+\begin{column}{2em}
+{\uncover<2->{\Huge\fcshadow{\alert?}}}
+\end{column}
+\end{columns}
+
+\vskip2em
+
+\uncover<3->{\textcolor{blue}{バグが含む}\textcolor{orange}{不具合}がある
+クローンを\\\fcshadow{\Large 正解(True Positive)}}
+
+\vskip1em
+
+\uncover<4->{\textcolor{blue}{バグがない}\textcolor{orange}{不具合}がある
+クローンを\\\fcshadow{\Large 誤検出(False Positive)}}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{既存研究 Related Researches}
+\begin{frame}{既存研究：クローンに基づく不具合検出}
+{Related Researches: Clone-based Anomaly Detection}
+クローン間の識別子(Identifier)の不一致
+
+\upcite{juergens2009code}
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Juergens et~al.(2009)Juergens, Deissenboeck, Hummel, and
+  Wagner]{juergens2009code}
+E.~Juergens, F.~Deissenboeck, B.~Hummel, and S.~Wagner, ``Do code clones
+  matter?'' in \emph{Proceedings of the 31st International Conference on
+  Software Engineering}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE Computer
+  Society, 2009, pp. 485--495.
+\end{thebibliography}
+}
+
+\vskip2em
+
+クローン周りのコード片の差異\upcite{jiang2007context}
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Jiang et~al.(2007{\natexlab{a}})Jiang, Su, and Chiu]{jiang2007context}
+\alert{L.~Jiang}, Z.~Su, and E.~Chiu, ``Context-based detection of clone-related
+  bugs,'' in \emph{ESEC/FSE}, vol. 2007, 2007.
+\end{thebibliography}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{正解の例 Example of True Positive}
+\begin{frame}[fragile]{正解の例}{Example of True Positive}
+\vskip1em
+Linux-2.6.19 から見つけたクローン
+\vskip1em
+\begin{columns}
+\begin{column}{12.5em}
+\texttt{\tiny fs/sysfs/inode.c}
+\lstset{firstnumber=219}
+\begin{lstlisting}
+struct dentry * dentry = sd->s_dentry; 
+@\tikz[remember picture]\node (c0b){};@
+if (dentry) { 
+   @\tikz[remember picture]\node (c1b){};@ /* the fol@\tikz[remember picture]\node (c0e){};@lowing parts are detected as clones */ 
+    spin_lock(&dcache_lock); 
+    spin_lock(&dentry->d_lock); 
+    if (!(d_unhashed(dentry) && dentry->d_inode)) { 
+        dget_locked(dentry); 
+        __d_drop(dentry); 
+        spin_unlock(&dentry->d_lock); 
+        spin_unlock(&dcache_lock);
+        ......         @\tikz[remember picture]\node (c1m){};@                              @\tikz[remember picture]\node (c1e){};@
+\end{lstlisting}
+\end{column}
+\begin{column}{11.5em}
+\texttt{\tiny drivers/infiniband/hw/ipath/ipath\_fs.c}
+\lstset{firstnumber=456}
+\begin{lstlisting}
+struct dentry *tmp;
+
+tmp = lookup_one_len(name, parent, strlen(name));
+@\tikz[remember picture]\node (c2b){};@
+spin_lock(&dcache_lock);
+spin_lock(&tmp->d_lock);
+if (!(d_unhashed(tmp) && tmp->d_inode)) {
+    dget_locked(tmp);
+    __d_drop(tmp);
+    spin_unlock(&tmp->d_lock);
+    spin_unlock(&dcache_lock);
+    ......         @\tikz[remember picture]\node (c2m){};@                          @\tikz[remember picture]\node (c2e){};@
+\end{lstlisting}
+\end{column}
+\end{columns}
+
+\begin{overlayarea}{24em}{3em}
+\only<2>{
+\begin{center}
+\tikz[remember picture]\node (c3b){};
+Type-2クローン
+\tikz[remember picture]\node (c3e){};
+\end{center}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[fill=blue,draw=black,opacity=0.2] (c1b) rectangle (c1e);
+\draw[fill=blue,draw=black,opacity=0.2] (c2b)+(-5pt,0) rectangle (c2e);
+
+\draw[->,ultra thick,>=latex] (c3b)--(c1m);
+\draw[->,ultra thick,>=latex] (c3e)--(c2m);
+\end{tikzpicture}
+}
+\only<3->{
+\begin{center}
+\tikz[remember picture]\node (c4b){};
+片方にNullであるかの判断
+\tikz[remember picture]\node (c5e){};
+\end{center}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[fill=red,draw=black,opacity=0.2] (c0b)+(-5pt,0) rectangle (c0e);
+
+\draw[->,ultra thick,>=latex] (c4b)--(c0e);
+\end{tikzpicture}
+
+}
+\end{overlayarea}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{誤検出の例 Example of False Positive}
+\begin{frame}[fragile]{誤検出の例}{Example of False Positive}
+\begin{columns}
+\begin{column}{12em}
+\texttt{\tiny fs/nfsd/nfs3xdr.c}
+\begin{lstlisting}[firstnumber=423]
+if (!(p = decode_fh(p, &args->fh))
+||!(p=decode_filename(p,&args->name,&args->len))
+||!(p=decode_sattr3(p,&args->attrs)))
+    return 0;
+\end{lstlisting}
+\texttt{\tiny drivers/hwmon/lm87.c}
+\begin{lstlisting}[firstnumber=688]
+if ((err = device_create_file(&new_client->dev, 
+            &dev_attr_in6_input)) 
+     || (err = device_create_file(&new_client->dev, 
+            &dev_attr_in6_min)) 
+     || (err = device_create_file(&new_client->dev, 
+            &dev_attr_in6_max))) 
+        goto exit_remove; 
+\end{lstlisting}
+\end{column}
+\begin{column}{13em}
+\texttt{\tiny fs/nfsd/nfsxdr.c}
+\begin{lstlisting}[firstnumber=344]
+if (!(p = decode_fh(p, &args->ffh))
+||!(p=decode_fh(p,&args->tfh))
+||!(p=decode_filename(p,&args->tname,&args->tlen)))
+    return 0;
+\end{lstlisting}
+\texttt{\tiny drivers/hwmon/gl520sm.c}
+\begin{lstlisting}[firstnumber=615]
+if ((err = device_create_file(&new_client->dev,
+            &dev_attr_in4_input))
+     || (err = device_create_file(&new_client->dev,
+            &dev_attr_in4_min))
+     || (err = device_create_file(&new_client->dev,
+            &dev_attr_in4_max)))
+        goto exit_remove_files;
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{不具合があるクローンの誤検出率}
+\begin{frame}{不具合があるクローンの誤検出率}{False Positives in Anomaly Clones}
+\begin{columns}
+\begin{column}{12em}%
+\begin{center}\fcshadow{Linux Kernel}\end{center}
+\begin{tikzpicture}[scale=1.5]
+\fill[red!50,draw=red] (12:1.5cm) arc[start angle=12,delta angle=336,radius=1.5cm] 
+-- (-12:1cm) arc[start angle=348,delta angle=-336,radius=1cm] --cycle;
+\node[text width=2cm] at (0,0) {>800 \mbox{クローン}};
+\fill[blue!50,draw=blue] (-12:2cm) arc[start angle=-12,delta angle=18,radius=2cm] 
+-- (6:1.5cm) arc[start angle=6,delta angle=-18,radius=1.5cm] --cycle;
+\fill[purple!50,draw=purple] (6:2cm) arc[start angle=6,delta angle=6,radius=2cm] 
+-- (12:1.5cm) arc[start angle=12,delta angle=-6,radius=1.5cm] --cycle;
+\draw[->,ultra thick,>=latex] (33:2cm) node {\small 17 悪い習慣} -- (12:1.75cm);
+\draw[->,ultra thick,>=latex] (-33:2cm) node {41 正解} -- (-12:1.75cm);
+\end{tikzpicture}
+\end{column}
+\begin{column}{12em}%
+\visible<2->{%
+\begin{center}\fcshadow{Eclipse}\end{center}
+\begin{tikzpicture}[scale=1.5]
+\fill[red!50,draw=red] (15:1.5cm) arc[start angle=15,delta angle=326,radius=1.5cm] 
+-- (-19:1cm) arc[start angle=-19,delta angle=-326,radius=1cm] --cycle;
+\node[text width=2cm] at (0,0) {>400 \mbox{クローン}};
+\fill[blue!50,draw=blue] (-19:2cm) arc[start angle=-19,delta angle=19,radius=2cm] 
+-- (0:1.5cm) arc[start angle=0,delta angle=-19,radius=1.5cm] --cycle;
+\fill[purple!50,draw=purple] (0:2cm) arc[start angle=0,delta angle=15,radius=2cm] 
+-- (15:1.5cm) arc[start angle=15,delta angle=-15,radius=1.5cm] --cycle;
+\draw[->,ultra thick,>=latex] (33:2cm) node {\small 17 悪い習慣} -- (15:1.75cm);
+\draw[->,ultra thick,>=latex] (-33:2cm) node {21 正解} -- (-19:1.75cm);
+\end{tikzpicture}
+}%
+\end{column}
+\end{columns}
+
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Jiang et~al.(2007{\natexlab{a}})Jiang, Su, and Chiu]{jiang2007context}
+\alert{L.~Jiang}, Z.~Su, and E.~Chiu, ``Context-based detection of clone-related
+  bugs,'' in \emph{ESEC/FSE}, vol. 2007, 2007.
+\end{thebibliography}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{不具合があるクローンの誤検出率 II}
+{False Positives in Anomaly Clones II}
+\begin{center}\fcshadow{商用ソフトウェア\upcite{gabel2010scalable}}\end{center}
+
+\begin{tikzpicture}[scale=1.2]
+\path (0.25cm,-0.5cm) node {\small{500 確かめた}};
+\path (4.0cm,-0.5cm) node {
+    \small{\mbox{8103} \mbox{不具合} \mbox{クローン}}}; 
+\fill[green!50,draw=green] (0cm,0cm) rectangle (8.1cm,0.5cm);
+\fill[red!50,draw=red] (0cm,0cm) rectangle (0.5cm,0.5cm);
+
+\fill[red!50,draw=red] (0cm,2cm) rectangle (8.1cm,2.5cm);
+\fill[blue!50,draw=blue] (0cm,2cm) rectangle (2.41cm,2.5cm);
+\fill[purple!50,draw=purple] (2.41cm,2cm) rectangle (4.18cm,2.5cm);
+\draw (0.5cm,0.5cm) --(8.1cm,2cm);
+\draw (0cm,0.5cm) --(0cm,2cm);
+\path (1.2cm,3.5cm) node {\small{\mbox{149} \mbox{バグがある}}};
+\path (3.3cm,3cm) node {\scriptsize{109 Code\ Smells}};
+\path (6.7cm,3cm) node {不明};
+
+\end{tikzpicture}
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Gabel et~al.(2010)Gabel, Yang, Yu, Goldszmidt, and
+  Su]{gabel2010scalable}
+M.~Gabel, J.~Yang, Y.~Yu, M.~Goldszmidt, and Z.~Su, ``Scalable and systematic
+  detection of buggy inconsistencies in source code,'' in \emph{ACM Sigplan
+  Notices}, vol.~45, no.~10.\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2010,
+  pp. 175--190.
+\end{thebibliography}
+}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{コードクローンの四つの象限}
+\begin{frame}{コードクローンの四つの象限}{4 Quadrants of Code Clone Group}
+\begin{tabular}{cc|c|c}
+&&\multicolumn{2}{c}{一貫性}\\
+&&Inconsistent&Consistant\\\hline
+\multirow{2}{*}{可変性}&厳格(Rigid)&\action<visible@2-|alert@3>{\fcshadow{\checkmark}}    &\\\cline{2-4}
+                       &柔軟(Flexible)&\action<visible@2->{\fcshadow{\checkmark}}    &\\\hline
+\end{tabular}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{クローンに基づく不具合検出}
+\subsection{クローンに基づく不具合検出}
+\begin{frame}{クローンに基づく不具合検出}{Clone-based Anomaly Detection}
+Deckard\upcite{jiang2007deckard}
+
+\begin{columns}
+\begin{column}{8em}
+\begin{tikzpicture}
+\newcommand{\filepath}{ 
+(0cm,0cm)--(0cm,3cm)--(1.5cm,3cm)--(2cm,2.5cm)--(2cm,0cm)--cycle 
+(1.5cm,3cm)--(1.5cm,2.5cm)--(2cm,2.5cm)
+(0.25cm,0.25cm) -- (1.75cm,0.25cm)
+(0.25cm,0.50cm) -- (1.75cm,0.50cm)
+(0.25cm,0.75cm) -- (1.75cm,0.75cm)
+(0.25cm,1.00cm) -- (1.75cm,1.00cm)
+(0.25cm,1.25cm) -- (1.75cm,1.25cm)
+(0.25cm,1.50cm) -- (1.75cm,1.50cm)
+(0.25cm,1.75cm) -- (1.75cm,1.75cm)
+(0.25cm,2.00cm) -- (1.75cm,2.00cm)
+(0.25cm,2.25cm) -- (1.75cm,2.25cm)
+(0.25cm,2.50cm) -- (1.25cm,2.50cm)
+(0.25cm,2.75cm) -- (1.25cm,2.75cm)}
+
+\foreach \x/\y in {0.5cm/0.1,0.4cm/0.2,0.3cm/0.4,0.2cm/0.6,0.1cm/0.8,0.0cm/1}{
+\draw[scale=1.5,xshift=\x,yshift=\x,fill=white,fill opacity=\y,draw opacity=\y] \filepath;}
+\end{tikzpicture}
+\end{column}
+
+\visible<2->{
+\begin{column}{5em}
+\begin{tikzpicture}
+\draw[xshift=5cm,yshift=0cm,scale=0.7] 
+(0cm,0cm)--(0cm,3cm)--(1.5cm,3cm)--(2cm,2.5cm)--(2cm,0cm)--cycle 
+(1.5cm,3cm)--(1.5cm,2.5cm)--(2cm,2.5cm)
+(0.25cm,1.00cm) -- (1.25cm,1.00cm)
+(0.25cm,1.25cm) -- (1.75cm,1.25cm)
+(0.25cm,1.50cm) -- (1.75cm,1.50cm)
+(0.25cm,1.75cm) -- (1.75cm,1.75cm)
+(0.75cm,2.00cm) -- (1.75cm,2.00cm);
+
+\draw[xshift=5cm,yshift=2.5cm,scale=0.7] 
+(0cm,0cm)--(0cm,3cm)--(1.5cm,3cm)--(2cm,2.5cm)--(2cm,0cm)--cycle 
+(1.5cm,3cm)--(1.5cm,2.5cm)--(2cm,2.5cm)
+(0.25cm,1.00cm) -- (1.25cm,1.00cm)
+(0.25cm,1.25cm) -- (1.75cm,1.25cm)
+(0.25cm,1.50cm) -- (1.75cm,1.50cm)
+(0.25cm,1.75cm) -- (1.75cm,1.75cm)
+(0.75cm,2.00cm) -- (1.75cm,2.00cm);
+
+\end{tikzpicture}
+\end{column}
+}
+\visible<3->{
+\begin{column}{5em}
+\begin{tikzpicture}
+\begin{scope}[scale=0.5,every node/.style={draw,circle}]
+\node[circle,scale=0.5] at (15cm,8cm) {A}
+    child {node[circle,scale=0.5] {B}}
+    child {node[circle,scale=0.5] {C}
+        child {node[circle,scale=0.5]{D}}
+        child {node[circle,scale=0.5]{E}}
+    }
+;
+\end{scope}
+\begin{scope}[scale=0.5,every node/.style={draw,circle}]
+\node[circle,scale=0.5] at (15cm,3cm) {\alert<4->{O}}
+    child {node[circle,scale=0.5] {B} child {node[circle,scale=0.5]{\alert<4->{F}}}}
+    child {node[circle,scale=0.5] {C}
+        child {node[circle,scale=0.5]{D}}
+        child {node[circle,scale=0.5]{E}}
+    }
+;
+\end{scope}
+\end{tikzpicture}
+\end{column}}
+\end{columns}
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Jiang et~al.(2007{\natexlab{b}})Jiang, Misherghi, Su, and
+  Glondu]{jiang2007deckard}
+\alert{L.~Jiang}, G.~Misherghi, Z.~Su, and S.~Glondu, ``Deckard: Scalable and accurate
+  tree-based detection of code clones,'' in \emph{Proceedings of the 29th
+  international conference on Software Engineering}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE Computer Society, 2007, pp. 96--105.
+\end{thebibliography}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{動的洗練法 Dynamic Refinement}
+\subsection{従来のクローンレポートの静的洗練法}
+\begin{frame}{従来のクローンレポート静的洗練法}
+{Static Refinement of Clone Report in Other Researches}
+\begin{columns}
+\begin{column}{12em}
+\begin{tabular}{|c|c|c|}
+\hline
+ID & 内容 & Bug?\\
+\hline
+1& AAA &  \visible<2->{\fcshadow{?}}\\
+2& BBB &  \visible<2->{\fcshadow{?}}\\
+\rowcolor{red!50}
+3& CCC &  \visible<2->{\fcshadow{X}}\\
+4& DDD &  \visible<2->{\fcshadow{?}}\\
+5& EEE &  \visible<2->{\fcshadow{?}}\\
+6& FFF &  \visible<2->{\fcshadow{?}}\\
+\rowcolor{red!50}
+7& III &  \visible<2->{\fcshadow{X}}\\
+\ldots&\ldots&\ldots\\
+\hline
+\end{tabular}
+\end{column}
+\visible<3->{
+\begin{column}{12em}
+\begin{tabular}{|c|c|c|}
+\hline
+ID & 内容 & Bug?\\
+\hline
+\rowcolor{blue!50}1& AAA & \fcshadow{\checkmark}\\
+\rowcolor{red!50}2& BBB & \fcshadow{X}\\
+& & \\
+\rowcolor{blue!50}4& DDD &\fcshadow{\checkmark} \\
+\rowcolor{red!50}5& EEE & \fcshadow{X}\\
+\rowcolor{red!50}6& FFF & \fcshadow{X}\\
+& & \\
+\ldots&\ldots&\\
+\hline
+\end{tabular}
+\end{column}
+}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{クローンレポートの動的洗練法}
+\begin{frame}{クローンレポートの動的洗練法}
+{Dynamic Refinement of Clone Report}
+\begin{columns}
+\begin{column}{12em}
+\begin{tabular}{|c|c|c|}
+\hline
+ID & 内容 & Bug?\\
+\hline
+1& AAA &\tikz[remember picture]\node (d1b){};\\
+2& BBB &\tikz[remember picture]\node (d2b){};\\
+3& CCC &\tikz[remember picture]\node (d3b){};\\
+4& DDD &\tikz[remember picture]\node (d4b){};\\
+5& EEE &\tikz[remember picture]\node (d5b){};\\
+6& FFF &\tikz[remember picture]\node (d6b){};\\
+7& III &\tikz[remember picture]\node (d7b){};\\
+\ldots&\ldots&\ldots\\
+\hline
+\end{tabular}
+\end{column}
+\visible<2->{
+\begin{column}{12em}
+\begin{tabular}{|c|c|c|}
+\hline
+ID & 内容 & Bug?\\
+\hline
+\rowcolor{blue!50}\tikz[remember picture]\node (d1e){};1& AAA & \fcshadow{\checkmark}\\
+\rowcolor{red!50} \tikz[remember picture]\node (d2e){};2& BBB & X\\
+\tikz[remember picture]\node (d7e){};7& III & 90\% \\
+\tikz[remember picture]\node (d5e){};5& EEE & 70\% \\
+\tikz[remember picture]\node (d3e){};3& CCC & 50\% \\
+\tikz[remember picture]\node (d6e){};6& FFF & 30\% \\
+\tikz[remember picture]\node (d4e){};4& DDD & 10\% \\
+\ldots&\ldots&\ldots\\
+\hline
+\end{tabular}
+\end{column}
+}
+\end{columns}
+\visible<2->{
+\begin{tikzpicture}[remember picture,overlay,->,>=latex,ultra thick]
+\draw(d3b)--(d3e);
+\draw(d4b)--(d4e);
+\draw(d5b)--(d5e);
+\draw(d6b)--(d6e);
+\draw(d7b)--(d7e);
+\end{tikzpicture}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{動的洗練法の流れ}
+\begin{frame}{動的洗練法の流れ}{Active Refinement Process}
+\begin{tikzpicture}[every node/.style={text width=6em,align=center}]
+\path (0em,10em) node[draw,shape=rectangle] (ads){\mbox{不具合検出}
+    \mbox{システム}};
+\path (0em,5em) node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+(sbr){\mbox{ソートした} \mbox{バグレポート}};
+\path (0em,0em) node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+(ffbr){\mbox{最初の} \mbox{バグレポート}};
+\path (12em,0em) node[draw,trapezium,trapezium left angle=120, trapezium right angle=120pt]
+(uf){\mbox{ユーザからの} \mbox{フィードバック}};
+\path (12em,5em) node[draw,shape=rectangle] (re){洗練エンジン};
+\path (6em,3em) node {\guillemotleft 洗練の輪\guillemotright};
+
+
+\only<2-> {\path (12em,5em) 
+node[draw=red,shape=rectangle,fill=red!50,drop shadow={opacity=0.25}]
+(re){洗練エンジン};}
+
+\begin{scope}[->,ultra thick,>=latex]
+\draw (ads) -- (sbr);
+\draw (sbr) -- (ffbr);
+\draw (ffbr) -- (uf);
+\draw (uf) -- (re);
+\draw[<->] (re) -- (sbr);
+\end{scope}
+\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{洗練エンジン Refinement Engine}
+\subsection{洗練エンジンの流れ Process of Refinement Engine}
+\begin{frame}{洗練エンジンの流れ}{Process of Refinement Engine}
+\begin{center}
+\begin{tikzpicture}
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,12em) (input) {入力: バグレポートリスト};
+\node[draw,rectangle] at (0,10em) (fe) {ソースコードから特徴抽出};
+\only<2->{\node[draw,rectangle,draw=red,fill=red!30,drop shadow={opacity=0.25}]
+    at (0,10em) {ソースコードから特徴抽出};}
+\node[draw,rectangle] at (0,7em) (pp) {
+\begin{tabular}{c|c}
+\multicolumn{2}{c}{前処理}\\\hline
+特徴を選択&Re-balancing\\
+\end{tabular}
+};
+\node[draw,rectangle] at (0,4em) (class) {分類};
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,2em) (dm) {識別モデル};
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,0em) (ri) {順番を調整した入力};
+
+\begin{scope}[->,ultra thick,>=latex]
+\draw (input) -- (fe);
+\draw (fe) -- (pp);
+\draw (pp) -- (class);
+\draw (class) -- (dm);
+\draw (dm) -- (ri);
+\draw (input) -| (8em,7em) |- (dm);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{特徴抽出: 構文木を構築}
+\begin{frame}{特徴抽出: 構文木を構築}{Feature Extraction: Tree Constraction}
+\begin{columns}
+\begin{column}{6em}
+\begin{tikzpicture}
+\draw
+(0cm,0cm)--(0cm,3cm)--(1.5cm,3cm)--(2cm,2.5cm)--(2cm,0cm)--cycle 
+(1.5cm,3cm)--(1.5cm,2.5cm)--(2cm,2.5cm)
+(0.25cm,0.25cm) -- (1.75cm,0.25cm)
+(0.25cm,0.50cm) -- (1.75cm,0.50cm)
+(0.25cm,0.75cm) -- (1.75cm,0.75cm)
+(1.00cm,1.00cm) -- (1.75cm,1.00cm);
+\draw[blue,thick]
+(0.25cm,1.00cm) -- (1.00cm,1.00cm)
+(0.25cm,1.25cm) -- (1.75cm,1.25cm)
+(0.25cm,1.50cm) -- (1.75cm,1.50cm)
+(0.25cm,1.75cm) -- (1.75cm,1.75cm)
+(0.75cm,2.00cm) -- (1.75cm,2.00cm);
+\draw
+(0.25cm,2.00cm) -- (0.75cm,2.00cm)
+(0.25cm,2.25cm) -- (1.75cm,2.25cm)
+(0.25cm,2.50cm) -- (1.25cm,2.50cm)
+(0.25cm,2.75cm) -- (1.25cm,2.75cm);
+\end{tikzpicture}
+\end{column}
+\begin{column}{18em}
+\only<1>{
+\begin{tikzpicture}[every node/.style={ellipse,draw,scale=0.5},
+    level 1/.style={sibling distance=7em},
+    level 2/.style={sibling distance=6.5em},
+    level 3/.style={sibling distance=2.5em},
+    level 4/.style={sibling distance=3em},
+    ]
+\node {programm}
+child {
+    node {class A}
+    child {node {method f}child { node {...}}}
+}
+child {
+    node {class B}
+    child {
+        node {method g}
+        child {node {init}}
+        child {node {return}}
+    }
+    child{
+        node {method h}
+        child {node {init}}
+        child {
+            node {call}
+            child {node {name}}
+            child {node {expr-list}}
+        }
+        child {node {return}}
+    }
+}
+child{
+    node {global func ...}
+};
+}
+\only<2>{
+\begin{tikzpicture}[every node/.style={ellipse,draw,scale=0.5},
+    level 1/.style={sibling distance=7em},
+    level 2/.style={sibling distance=6.5em},
+    level 3/.style={sibling distance=2.5em},
+    level 4/.style={sibling distance=3em},
+    ]
+\node {programm}
+child {
+    node {class A}
+    child {node {method f}child { node {...}}}
+}
+child {
+    node {class B}
+    child {
+        node {method g}
+        child {node {init}}
+        child[blue] {node {return}}
+    }
+    child[blue]{
+        node {method h}
+        child {node {init}}
+        child {
+            node {call}
+            child {node {name}}
+            child {node {expr-list}}
+        }
+        child {node {return}}
+    }
+}
+child{
+    node {global func ...}
+};
+}
+\only<3>{
+\begin{tikzpicture}[every node/.style={ellipse,draw,scale=0.5},
+    level 1/.style={sibling distance=7em},
+    level 2/.style={sibling distance=6.5em},
+    level 3/.style={sibling distance=2.5em},
+    level 4/.style={sibling distance=3em},
+    ]
+\node[opacity=0.2] {programm}
+child[opacity=0.2] {
+    node {class A}
+    child {node {method f}child { node {...}}}
+}
+child[opacity=1.0] {
+    node[red,fill=red!50,drop shadow={opacity=0.25}] {class B}
+    child {
+        node {method g}
+        child {node {init}}
+        child[blue] {node {return}}
+    }
+    child[blue]{
+        node {method h}
+        child {node {init}}
+        child {
+            node {call}
+            child {node {name}}
+            child {node {expr-list}}
+        }
+        child {node {return}}
+    }
+}
+child[opacity=0.2]{
+    node[opacity=0.2] {global func ...}
+};
+}
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{特徴抽出: 五つの特徴}
+\begin{frame}{特徴抽出: 五つの特徴}{Feature Extraction: 5 features}
+\begin{columns}
+\begin{column}{12em}
+\alert<2>{基本的な特徴\\{\small Basic Features}}\\
+\alert<3>{対の特徴\\{\small Pair Features}}\\
+\alert<4>{基本的な特徴の割合\\{\small Proportional FeaturesーBasic}}\\
+\alert<5>{対の特徴の割合\\{\small Proportional FeaturesーPair}}\\
+\alert<6>{他の特徴\\{\small Other Features}}
+\end{column}
+\begin{column}{12em}%
+\only<1,6>{\tikz[every node/.style={draw,ellipse,scale=0.5},
+    level 1/.style={sibling distance=5.5em},
+    level 2/.style={sibling distance=2em},
+    level 3/.style={sibling distance=3em},
+    remember picture]
+\node {class B}
+child {
+    node {method g}
+    child{node {init}}
+    child{node {return}}}
+child{
+    node {method h}
+    child {node {init}}
+    child {
+        node {call}
+        child {node {name}}
+        child {node {expr-list}}
+    }
+    child {node {return}}};}%
+\only<2,4>{\tikz[every node/.style={draw,ellipse,scale=0.5},
+    level 1/.style={sibling distance=5.5em},
+    level 2/.style={sibling distance=2em},
+    level 3/.style={sibling distance=3em},
+    remember picture]
+\node {class B}
+child {
+    node[red] {method g}
+    child{node {init}}
+    child{node {return}}}
+child{
+    node[red] {method h}
+    child {node {init}}
+    child {
+        node {call}
+        child {node {name}}
+        child {node {expr-list}}
+    }
+    child {node {return}}};}%
+\only<3,5>{\tikz[every node/.style={draw,ellipse,scale=0.5},
+    level 1/.style={sibling distance=5.5em},
+    level 2/.style={sibling distance=2em},
+    level 3/.style={sibling distance=3em},
+    remember picture]
+\node[red] {class B}
+child[red] {
+    node[red] {method g}
+    child[black]{node {init}}
+    child[black]{node {return}}}
+child{
+    node {method h}
+    child {node {init}}
+    child {
+        node {call}
+        child {node {name}}
+        child {node {expr-list}}
+    }
+    child {node {return}}};}%
+
+\visible<6>{クローンの数$|CG|$, 
+    クローンの平均サイズ$\frac{\sum_{c \in CG}|C|}{|CG|}$}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{特徴抽出: 五つの特徴の例}
+\begin{frame}[fragile]{特徴抽出: 五つの特徴の例}
+{Feature Extraction: Example of 5 features}
+\begin{columns}
+\begin{column}{12em}
+\lstset{basicstyle=\scriptsize}
+\begin{lstlisting}
+decode_sattr3(p, &args->attrs)
+\end{lstlisting}
+\end{column}
+\begin{column}{12em}
+\begin{lstlisting}
+decode_filename(p, &args->tname, &args->tlen)
+\end{lstlisting}
+\end{column}
+\end{columns}
+\pause
+\begin{columns}
+\begin{column}{12em}
+\begin{center}
+\tikz[every node/.style={ellipse,draw=blue,scale=0.5,grow=right},scale=0.5]
+\node{Call}[grow=right,level distance=7em]
+child{node{Name}}
+child{node{Expr-list}
+    child{node{Expr}}
+    child{node{Expr}}};
+\end{center}
+\end{column}
+\begin{column}{12em}
+\begin{center}
+\tikz[every node/.style={ellipse,draw=blue,scale=0.5,grow=right},scale=0.5]
+\node{Call}[grow=right,level distance=7em]
+child{node{Name}}
+child{node{Expr-list}
+    child{node{Expr}}
+    child{node{Expr}}
+    child{node{Expr}}};
+\end{center}
+\end{column}
+\end{columns}
+\pause
+{\scriptsize
+\begin{tabular}{|p{3.7em}c|p{4.8em}c|p{3.7em}c|p{4.8em}c|p{2.5em}c|}
+\toprule
+\multicolumn{2}{|c|}{基本}&
+\multicolumn{2}{c|}{対}&
+\multicolumn{2}{c|}{基本割合}&
+\multicolumn{2}{c|}{対割合}&
+\multicolumn{2}{c|}{他}\\
+\midrule
+タイプ&数&タイプ&数&タイプ&割合&タイプ&割合&タイプ&値\\
+\midrule
+Call&2&Call/Name&2&Call&100\%&Call/Name&100\%&Num&2\\
+Name&2&Call/Expr-list&2&Name&100\%&Call/Expr-list&100\%&Avg&5.5\\
+Expr-list&2&Expr-list/Expr&2&Expr-list&100\%&Expr-list/Expr&100\%&&\\
+Expr     &2&              & &Expr     &100\%&              &     &&\\
+\bottomrule
+\end{tabular}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{洗練エンジンの流れ(再掲)}{Process of Refinement Engine (Again)}
+\begin{center}
+\begin{tikzpicture}
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,12em) (input) {入力: バグレポートリスト};
+\node[draw,rectangle] at (0,10em) (fe) {ソースコードから特徴抽出};
+\node[draw,rectangle] at (0,7em) (pp) {
+\begin{tabular}{c|c}
+\multicolumn{2}{c}{\fcshadow{\alert{前処理}}}\\\hline
+特徴を選択&Re-balancing\\
+\end{tabular}
+};
+\node[draw,rectangle] at (0,4em) (class) {分類};
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,2em) (dm) {識別モデル};
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,0em) (ri) {順番を調整した入力};
+
+\begin{scope}[->,ultra thick,>=latex]
+\draw (input) -- (fe);
+\draw (fe) -- (pp);
+\draw (pp) -- (class);
+\draw (class) -- (dm);
+\draw (dm) -- (ri);
+\draw (input) -| (8em,7em) |- (dm);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{前処理:特徴選択}
+\begin{frame}[shrink=15,squeeze]{前処理: 特徴選択}{Preprocessing: Feature Selection}
+\begin{itemize}
+\item \fcshadow{$c$}はクローンのクラスラベル, \fcshadow{$f$}は一つの特徴
+\begin{itemize}
+\item 正解は\fcshadow{$ve$}クラス, 誤検出は\fcshadow{$-ve$}クラス
+\end{itemize}
+\end{itemize}
+
+情報利得(Information Gain)は：
+\begin{eqnarray}
+IG(c|f)&=&H(c)-H(c|f) \\
+H(c)&=&-\sum_{c_i\in\{\pm ve\}}P(c_i)\log P(c_i) \\
+H(c|f)&=&-\sum P(f)\sum_{c_i\in\{\pm ve\}}P(c_i|f)\log P(c_i|f) 
+\end{eqnarray}
+
+情報利得を基づいてWeka\upcite{holmes1994weka}を用いて特徴選択
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Holmes et~al.(1994)Holmes, Donkin, and Witten]{holmes1994weka}
+G.~Holmes, A.~Donkin, and I.~Witten, ``Weka: A machine learning workbench,'' in
+  \emph{Intelligent Information Systems, 1994. Proceedings of the 1994 Second
+  Australian and New Zealand Conference on}.\hskip 1em plus 0.5em minus
+  0.4em\relax Ieee, 1994, pp. 357--361.
+\end{thebibliography}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{前処理: Data Re-balancing}
+\begin{frame}{前処理: Data Re-balancing}{Preprocessing: Data Re-balancing}
+\begin{columns}
+\begin{column}{14em}
+\begin{tikzpicture}[>=latex]
+\only<3->{\draw[draw=black!10] plot[polar comb,mark=*,mark options={red!10}] coordinates 
+{(112:1em) (234:3em) (77:4em) (260:5em) (96:2em) (53:6em) (200:1em)};}
+\only<1,2>{\draw plot[polar comb,mark=*,mark options={red}] coordinates 
+{(112:1em) (234:3em) (77:4em) (260:5em) (96:2em) (53:6em) (200:1em)};}
+\draw plot[polar comb,mark=*,mark options={blue}] coordinates 
+{(12:5em) (-61:4em) (135:2em)};
+\draw plot[polar comb,mark=*,mark options={red}] coordinates 
+{(20:3.5em) (-24:7em) (123:5em)};
+\draw[->] (-7em,0) --(7em,0);
+\draw[->] (0,-6em) --(0,6em);
+\only<2->{
+\draw[ultra thick] (12:3em)arc[start angle=12,end angle=20,radius=3em];
+\draw[ultra thick] (-61:3em)arc[start angle=-61,end angle=-24,radius=3em];
+\draw[ultra thick] (135:1.5em)arc[start angle=135,end angle=123,radius=1.5em];}
+\end{tikzpicture}
+\end{column}
+\begin{column}{10em}
+Cosine-similarity \upcite{kantardzic2011data}
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Kantardzic(2011)]{kantardzic2011data}
+M.~Kantardzic, \emph{Data mining: concepts, models, methods, and
+  algorithms}.\hskip 1em plus 0.5em minus 0.4em\relax Wiley-IEEE Press, 2011.
+\end{thebibliography}
+}
+\vskip1em
+nearest neighbor approach \upcite{renieres2003fault}
+{\tiny
+\hrule
+\begin{thebibliography}{1}
+\bibitem[Renieres and Reiss(2003)]{renieres2003fault}
+M.~Renieres and S.~Reiss, ``Fault localization with nearest neighbor queries,''
+  in \emph{Automated Software Engineering, 2003. Proceedings. 18th IEEE
+  International Conference on}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2003, pp. 30--39.
+\end{thebibliography}
+}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{洗練エンジンの流れ(再掲)}{Process of Refinement Engine (Again)}
+\begin{center}
+\begin{tikzpicture}
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,12em) (input) {入力: バグレポートリスト};
+\node[draw,rectangle] at (0,10em) (fe) {ソースコードから特徴抽出};
+\node[draw,rectangle] at (0,7em) (pp) {
+\begin{tabular}{c|c}
+\multicolumn{2}{c}{前処理}\\\hline
+特徴を選択&Re-balancing\\
+\end{tabular}
+};
+\node[draw,rectangle,drop shadow={opacity=0.25},fill=red!30] at (0,4em) (class) {分類};
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,2em) (dm) {識別モデル};
+\node[draw,trapezium,trapezium left angle=60, trapezium right angle=120pt]
+at (0,0em) (ri) {順番を調整した入力};
+
+\begin{scope}[->,ultra thick,>=latex]
+\draw (input) -- (fe);
+\draw (fe) -- (pp);
+\draw (pp) -- (class);
+\draw (class) -- (dm);
+\draw (dm) -- (ri);
+\draw (input) -| (8em,7em) |- (dm);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{非ネスト汎化された最も近隣分類法}
+\begin{frame}{非ネスト汎化された最も近隣分類法}
+{NNGe: Nearest Neighbor Classification with Non-Nested Generalization}
+\begin{columns}
+\begin{column}{9.5em}
+{\small
+\alert<4>{非ネスト \upcite{wettschereck1995experimental}}\\
+\alert<3>{汎化された \upcite{salzberg1991nearest}}\\
+\alert<2>{最も近隣 \upcite{tan2006effective}}\\
+分類法(NNGe) \upcite{martin1995instance}
+}
+{\tiny
+\hrule
+\begin{thebibliography}{4}
+\bibitem[Wettschereck et al.(1995)]{wettschereck1995experimental}
+D.~Wettschereck and T.~Dietterich, ``An experimental comparison of the
+  nearest-neighbor and nearest-hyperrectangle algorithms,'' \emph{Machine
+  Learning}, vol.~19, no.~1, pp. 5--27, 1995.
+
+\bibitem[Salzberg(1991)]{salzberg1991nearest}
+S.~Salzberg, ``A nearest hyperrectangle learning method,'' \emph{Machine
+  learning}, vol.~6, no.~3, pp. 251--276, 1991.
+
+\bibitem[Tan(2006)]{tan2006effective}
+S.~Tan, ``An effective refinement strategy for knn text classifier,''
+  \emph{Expert Systems with Applications}, vol.~30, no.~2, pp. 290--298, 2006.
+
+\bibitem[Martin(1995)]{martin1995instance}
+B.~Martin, ``Instance-based learning: nearest neighbour with generalisation,''
+  Ph.D. dissertation, University of Waikato, 1995.
+\end{thebibliography}
+}
+
+\end{column}
+\begin{column}{14.5em}
+\begin{tikzpicture}[thick,>=latex]
+\draw[->] (-1em,6em) -- (13em,6em);
+\draw[->] (6em,-1em) -- (6em,13em);
+
+\draw plot[only marks,mark=*,mark options={red}] coordinates 
+{(1em,10em) (2em,8em) (3em,9em) (2.5em,7em) (5em,8em) (2em,5em)};
+\draw plot[only marks,mark=*,mark options={blue}] coordinates 
+{(10em,4em) (12em,3em) (11.5em,5em) (12.5em,2em) (7em,2em) (4em,1em)};
+\draw plot[only marks,mark=*] coordinates {(6.5em,7em)};
+\only<2>{\draw[ultra thick,->] (6.5em,7em)--(5em,8em);}
+\only<3>{
+    \draw[red] (0.5em,4.5em) rectangle (5.5em,10.5em);
+    \draw[blue] (3.5em,0.5em) rectangle (13em,5.5em);
+    \draw[ultra thick,->] (6.5em,7em) -- (3em,7.5em);
+}
+\only<4>{
+    \draw[red] (0.5em,10.5em) rectangle (5.5em,6.5em);
+    \draw[blue] (6.5em,0.5em) rectangle (13em,5.5em);
+    \draw[ultra thick,->] (6.5em,7em) -- (3em,8.5em);
+}
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{分類法: 類似度の計算}
+\begin{frame}{分類法: 類似度の計算}{Classification: Calculation of Likelihood}
+\begin{eqnarray*}
+\small
+\textrm{LH}(dp)&=&0.5+\frac{\textrm{RS}(dp)}{2}\\
+\textrm{RS}(dp)&=&\frac{|\sum_{d_T \in D_T}\textit{sim}(d_p,d_T)|}{D_T} \\
+               & &-\frac{|\sum_{d_F \in D_F}\textit{sim}(d_p,d_F)|}{D_F} \\
+\textit{sim}(d_p,d)&=&1-\textit{dist}(d_p,d)\\
+\textit{dist}(d_p,d) &\in&[0,1]
+\end{eqnarray*}
+LH$(dp)$によってWekaのNNGe分類法を用いて分類
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{具体的な洗練の振舞い}
+\begin{frame}{具体的な洗練の振舞い}{Concrete Refinement Process}
+\begin{tikzpicture}
+\draw (0em,0em) rectangle (5em,12em);
+\foreach \x in {1.0em,1.5em,2.0em,2.5em,3.0em,3.5em,4.0em,4.5em,5.0em,5.5em,
+    6.0em,6.5em,7.0em,7.5em,8.0em,8.5em,9.0em,9.5em,10.0em,10.5em,11.0em}{
+    \draw (0.25em,\x) -- (4.75em,\x);
+}
+\only<2->{
+\foreach \x in{8em,9.0em,10.0em,10.5em,11.0em}{
+    \draw[thick,red] (0.25em,\x) -- (4.75em,\x);
+}
+    \draw[thick,blue] (0.25em,9.5em) -- (4.75em,9.5em);
+    \draw[thick,blue] (0.25em,8.5em) -- (4.75em,8.5em);
+    \node at (13em,9.5em){$\Bigg\}$最初の$k$個のレポート,正解を含む};
+}
+\only<3>{
+    \draw[thick,<->] (5em,1.5em) .. controls (6em,3.5em) .. (5em,5.5em);
+    \draw[thick,<->] (5em,1.0em) .. controls (7em,3.5em) .. (5em,6.0em);
+    \draw[thick,<->] (5em,2.0em) .. controls (6em,4.5em) .. (5em,7.0em);
+}
+\only<4->{
+    \node at (11em,6.5em){$\Big\}p$個のフィードバックプール};
+\foreach \x in{5.5em,6.0em,6.5em,7.5em}{
+    \draw[thick,red] (0.25em,\x) -- (4.75em,\x);
+}
+    \draw[thick,blue] (0.25em,7.0em) -- (4.75em,7.0em);
+}
+\only<5>{
+    \node at (13em,2em) {$\vdots$};
+    \node at (13em,3em) {$\vdots$};
+    \node at (13em,4em) {$\vdots$};
+    \node at (13em,5em) {$\vdots$};
+}
+\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{実験評価 Experiment and Evaluation}
+\subsection{評価方法: 平均正解発見率 APPF}
+\begin{frame}{評価方法: 平均正解発見率}
+{Evaluation Criteria: APPF: Average Percentage true Positives Found}
+{\small
+テストケースの優先順位付け領域から借りた概念. \\
+平均障害発見率(APFD: Average Percentage Faults Detected).}
+\begin{columns}
+\begin{column}{12.5em}
+\begin{tikzpicture}
+\draw[fill=blue!50!black] plot[ybar,bar shift=-0.5em] coordinates 
+{(1em,2em) (2em,4em) (3em,6em) (4em,6em) (5em,6em)
+    (6em,6em) (7em,8em) (8em,10em) (9em,10em) (10em,10em)};
+\draw (0em,0em) rectangle (10em,10em);
+\foreach \x in {10,20,...,100}{\node at (\x em/10 - 0.5em,-0.5em) {\scriptsize \x};}
+\foreach \x in {20,40,...,100}{\node at (-0.5em,\x em/10) {\scriptsize \x};}
+\node at (2em,9em) {\small APPF=62\%};
+\end{tikzpicture}
+\end{column}
+\begin{column}{12.5em}
+\begin{tikzpicture}
+\draw[fill=blue!50!black] plot[ybar,bar shift=-0.5em] coordinates 
+{(1em,2em) (2em,4em) (3em,6em) (4em,8em) (5em,10em)
+    (6em,10em) (7em,10em) (8em,10em) (9em,10em) (10em,10em)};
+\draw (0em,0em) rectangle (10em,10em);
+\foreach \x in {10,20,...,100}{\node at (\x em/10 - 0.5em,-0.5em) {\scriptsize \x};}
+\foreach \x in {20,40,...,100}{\node at (-0.5em,\x em/10) {\scriptsize \x};}
+\node at (2em,9em) {\small APPF=72\%};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{実験の対象と設定 Settings of Empirical Evaluation}
+\begin{frame}{実験の対象と設定}{Settings of Empirical Evaluation}
+\begin{tabular}{crrrrr}
+\hline
+名前    &バージョン & 不具合数&正解数&$k$&$p$\\
+\hline
+Linux   &2.6.19     & >800 & 57 & 50 & 1 \\
+Eclipse &20070108   & >400 & 38 & 50 & 1 \\
+ArgoUML &           & >50  & 15 & 10 & 1 \\
+\hline
+\end{tabular}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{実験の結果 Results of the Empirical Evaluation}
+\begin{frame}{実験の結果}{Results of the Empirical Evaluation}
+\begin{tabularx}{22em}{clX}
+\hline
+名前 & APPF\tikz[baseline]\draw[->,thick,>=latex] (0em,0em) .. controls
+(0.5em,0em).. (0.5em,1em); & Top-5順番の調整 \\
+\hline
+Linux & 11\%     & $694 \mapsto 18$, $672 \mapsto 64$, $760 \mapsto131$,
+      $770 \mapsto179$,$792 \mapsto206$\\
+Eclipse      & 87\%     & $373 \mapsto 4$, $348 \mapsto 11$, $394 \mapsto 29$,
+      $388 \mapsto 43$, $370 \mapsto 49$\\
+ArgoUML      & 86\%     & $40 \mapsto 12$, $35 \mapsto 15$, $34 \mapsto 11$,
+      $29 \mapsto 9$, $23 \mapsto 8$\\
+\hline    
+\end{tabularx}
+Linuxの結果は低いのは, この手法では改名に関するバグが取れない.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Top-3 情報利得 Top-3 Information Gain}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Top-3 情報利得 }{Top-3 Information Gain }
+{\footnotesize
+\begin{tabularx}{32em}{cXr}
+\hline
+Top&   特徴 & 情報利得\\ 
+\hline
+\multicolumn{3}{c}{Linux kernel}\\
+\hline
+1  &extern\_ definition$^P$          &0.015941 \\
+2  &extern\_ definition \_1$^P$       &0.015941 \\
+3  &program\#\#extern\_ definitions$^P$&0.015941 \\
+\hline
+\multicolumn{3}{c}{Eclipse}\\
+\hline
+1  &BOOL\_OR\_TK$^P$&0.01898\\
+2  &conditional\_ or\_ expression \#\# conditional\_ or\_ expression $^P$&0.01898\\
+3  &BOOL\_OR\_TK$^B$&0.01898\\
+\hline
+\multicolumn{3}{c}{ArgoUML}\\
+\hline
+1 &local\_ variable\_ declaration\_ statement $^B$&0.145772\\
+2 &variable\_ initializer $^B$&0.145772\\
+3 &block\_ statement \#\# local\_ variable\_ declaration\_ statement $^B$&0.145772\\
+\hline
+\end{tabularx}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{順番を調整した例 Example of Re-ordering}
+\begin{frame}[fragile]{順番を調整した例: Linux 696 $\mapsto$ 18}
+{Example of Re-ordering: Linux 694 $\mapsto$ 18}
+\begin{columns}
+\begin{column}{11em}
+\texttt{\tiny drivers/net/wireless/bcm43xx/bcm43xx\_sysfs.c}
+\begin{lstlisting}[firstnumber=347]
+struct bcm43xx_private *bcm = dev_to_bcm(dev);
+mutex_lock(&(bcm)->mutex);
+switch (bcm43xx_current_phy(bcm)->type) {
+    case BCM43xx_PHYTYPE_A:
+    ...
+\end{lstlisting}
+\begin{lstlisting}[firstnumber=362]
+    default:
+        assert(0);
+}
+mutex_unlock(&(bcm)->mutex);
+\end{lstlisting}
+\end{column}
+\begin{column}{13em}
+\texttt{\tiny drivers/net/wireless/bcm43xx/bcm43xx\_wx.c}
+\begin{lstlisting}[firstnumber=615]
+struct bcm43xx_private *bcm = bcm43xx_priv(net_dev);
+...
+\end{lstlisting}
+\begin{lstlisting}[firstnumber=618]
+mutex_lock(&bcm->mutex);
+mode = bcm43xx_current_radio(bcm)->interfmode;
+mutex_unlock(&bcm->mutex);
+switch (mode) {
+    case BCM43xx_RADIO_INTERFMODE_NONE:
+    ...
+\end{lstlisting}
+\begin{lstlisting}[firstnumber=632]
+    default:
+        assert(0);
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{順番を調整した例: Eclipse 373 $\mapsto$ 4}
+{Example of Re-ordering: Eclipse 373 $\mapsto$ 4}
+\begin{columns}
+\begin{column}{12em}
+\texttt{\tiny debug/internal/core/LaunchConfiguration.java }
+\begin{lstlisting}[firstnumber=253]
+if (file != null) { 
+    // validate edit 
+    if (file.isReadOnly()) { 
+        IStatus status = ResourcesPlugin.getWorkspace().validateEdit(new IFile[] {file}, null); 
+        if (!status.isOK()) { 
+            throw new CoreException(status); 
+\end{lstlisting}
+\end{column}
+\begin{column}{12em}
+\texttt{\tiny debug/internal/core/LaunchConfigurationWorkingCopy.java}
+\begin{lstlisting}[firstnumber=311]
+// validate edit
+if (file.isReadOnly()) {
+    IStatus status = ResourcesPlugin.getWorkspace().validateEdit(new IFile[] {file}, null);
+    if (!status.isOK()) {
+        throw new CoreException(status);
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{順番を調整した例: ArgoUML 40 $\mapsto$ 12}
+{Example of Re-ordering: ArgoUML 40 $\mapsto$ 12}
+\begin{columns}
+\begin{column}{12em}
+\texttt{\tiny argouml/uml/diagram/UMLMutableGraphSupport.java}
+\begin{lstlisting}[firstnumber=331]
+if (edge instanceof CommentEdge) { 
+    ... 
+} else if (Model.getFacade().isARelationship(edge) 
+        || Model.getFacade().isATransition(edge) 
+        || Model.getFacade().isAAssociationEnd(edge)){ 
+    return Model.getUmlHelper().getDestination(edge); 
+} else if (Model.getFacade().isALink(edge)) { 
+  ...
+} 
+\end{lstlisting}
+\end{column}
+\begin{column}{12em}
+\texttt{\tiny argouml/uml/diagram/UMLMutableGraphSupport.java}
+\begin{lstlisting}[firstnumber=360]
+if (edge instanceof CommentEdge) {
+    ...
+} else if (Model.getFacade().isAAssociation(edge)) {
+    List conns = new
+    ArrayList(Model.getFacade().getConnections(edge));
+    return conns.get(1);
+} else if (Model.getFacade().isARelationship(edge)
+        || Model.getFacade().isATransition(edge)
+        || Model.getFacade().isAAssociationEnd(edge)){
+    return Model.getUmlHelper().getDestination(edge);
+} else if (Model.getFacade().isALink(edge)) {
+    ...
+}
+\end{lstlisting}
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{考察, 結論及び今後の課題 }
+\subsection{妥当性の考察 Threats to Validity}
+\begin{frame}{妥当性の考察(と質問)}{Threats to Validity (and Questions)}
+\begin{itemize}
+\item APPFはAPFDから借りた概念
+    \begin{itemize}
+    \item 他に使われていない
+    \end{itemize}
+\item 本当にBugであるかとうかは検証していない
+    \begin{itemize}
+    \item 人間で目で見て判断した
+    \item 後のバージョンに修正したかを検証していない (質問)
+    \end{itemize}
+\item ３つのシステムしかない
+    \begin{itemize}
+    \item CとJavaしかない, 他の言語に対応できるか?
+    \item 古いバージョンを使った原因は? (質問)
+        \begin{itemize}
+        \item LinuxとEclipseの実験の一部は2007に発表した研究.
+        今回追加したのはArgoUML.
+        \item Long-term-serviceではないから, バグが多いかも
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{結論と今後の課題 Conclusion and Future Work}
+\begin{frame}{結論と今後の課題}{Conclusion and Future Work}
+結論
+\begin{itemize}
+\item クローンバグレポートの動的な洗練法を提案した
+\item この方法について, 評価方法APPFを採用された
+\item Linux, Eclipse, ArgoUMLの３つのシステムで実験を行った.
+    \begin{itemize}
+    \item 結果はそれぞれ 11\%, 87\%, 86\%
+    \end{itemize}
+\end{itemize}
+今後の課題
+\begin{itemize}
+\item 他のソフトウェアに対応してみたい
+\item バグレポート以外の不具合レポートに対応してみたい
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\backupbegin
+
+\begin{frame}{私の研究との比較}{Comparing with My Research}
+\begin{tabularx}{23em}{c|XX}
+             &この手法&私の研究\\
+\hline
+着目点       &バグを不具合クローンから見つけ & 人によって判断の差異\\
+クローン     &構文木 Type-3  & トークン列 Type-2  \\
+学習特徴 &木のNode, Edgeの数と割合& トークンの型のtf-idf\\
+分類法       &非ネスト汎化された最も近隣 NNGe
+&Cosine-Similarityの重み付き平均数\\
+評価方法     &平均正解発見率 APPF & 訓練集合-正確率の図\\
+
+\end{tabularx}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowdisplaybreaks,shrink=25]{特徴抽出: 五つの特徴の定義}
+{Feature Extraction: Defination of 5 features}
+\begin{block}{定義: 基本的な特徴(Basic Features)}
+$(t,|CS|)$,若し$CS = \{c \in CG | c \textrm{に}t\textrm{タイプが存在する}\}$
+$ \wedge |CS|>0$
+\end{block}
+\begin{block}{定義: 対の特徴(Pair Features)}
+$(t_1,t_2,|CS|)$,若し$CS = \{c \in CG | \exists_{n_1,n_2 \in c}$ 
+$n_1$と$n_2$は連結されている$\wedge$
+$n_1$のタイプは$t_1 \wedge$
+$n_2$のタイプは$t_2\} \wedge |CS|>0$
+\end{block}
+\begin{block}{定義: 基本的な特徴の割合(Proportional FeaturesーBasic)}
+$(t,\frac{|CS|}{|CG|})$,若し$CS = \{c \in CG | c \textrm{に}t\textrm{タイプが存在する}\}$
+$ \wedge |CS|>0$
+\end{block}
+\begin{block}{定義: 対の特徴の割合(Proportional FeaturesーPair)}
+$(t_1,t_2,\frac{|CS|}{|CG|})$,若し$CS = \{c \in CG | \exists_{n_1,n_2 \in c}$ 
+$n_1$と$n_2$は連結されている$\wedge$
+$n_1$のタイプは$t_1 \wedge$
+$n_2$のタイプは$t_2\} \wedge |CS|>0$
+\end{block}
+\begin{block}{定義: 他の特徴}
+クローンの数$|CG|$, クローンの平均サイズ$\frac{\sum_{c \in CG}|C|}{|CG|}$
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowframebreaks]{参考文献}{Reference}
+{\scriptsize
+\bibliographystyle{IEEEtranN}
+\bibliography{anomaly}
+}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backupend
+\end{document}

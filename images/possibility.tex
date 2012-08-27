@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usetikzlibrary{shapes,arrows,shadows,mindmap,backgrounds}
+
+\begin{document}
+\begin{tikzpicture}[thick,>=latex]
+\draw[->] (-1em,6em) -- (13em,6em);
+\draw[->] (6em,-1em) -- (6em,13em);
+
+\draw plot[only marks,mark=*,mark options={red}] coordinates 
+{(1em,10em) (2em,8em) (3em,9em) (2.5em,7em) (5em,8em) (2em,5em)};
+\draw plot[only marks,mark=*,mark options={blue}] coordinates 
+{(10em,4em) (12em,3em) (11.5em,5em) (12.5em,2em) (7em,2em) (4em,1em)};
+\draw plot[only marks,mark=*] coordinates {(6.5em,7em)};
+
+\end{tikzpicture}
+
+\vskip2em
+
+\begin{tikzpicture}[thick,>=latex]
+\draw[->] (-1em,6em) -- (13em,6em);
+\draw[->] (6em,-1em) -- (6em,13em);
+
+\draw plot[only marks,mark=*,mark options={red}] coordinates 
+{(1em,10em) (2em,8em) (3em,9em) (2.5em,7em) (5em,8em) (2em,5em)};
+\draw plot[only marks,mark=*,mark options={blue}] coordinates 
+{(10em,4em) (12em,3em) (11.5em,5em) (12.5em,2em) (7em,2em) (4em,1em)};
+\draw plot[only marks,mark=*] coordinates {(6.5em,7em)};
+
+\foreach \x/\y in {1em/10em, 2em/8em, 3em/9em, 2.5em/7em, 5em/8em, 2em/5em}{
+  \draw[ultra thick,->] (6.5em,7em)--(\x,\y);
+}
+
+
+\end{tikzpicture}
+
+\vskip2em
+
+\begin{tikzpicture}[thick,>=latex]
+\draw[->] (-1em,6em) -- (13em,6em);
+\draw[->] (6em,-1em) -- (6em,13em);
+
+\draw plot[only marks,mark=*,mark options={red}] coordinates 
+{(1em,10em) (2em,8em) (3em,9em) (2.5em,7em) (5em,8em) (2em,5em)};
+\draw plot[only marks,mark=*,mark options={blue}] coordinates 
+{(10em,4em) (12em,3em) (11.5em,5em) (12.5em,2em) (7em,2em) (4em,1em)};
+\draw plot[only marks,mark=*] coordinates {(6.5em,7em)};
+
+\foreach \x/\y in {10em/4em,12em/3em,11.5em/5em,12.5em/2em,7em/2em,4em/1em}{
+  \draw[ultra thick,->] (6.5em,7em)--(\x,\y);
+}
+
+
+\end{tikzpicture}
+\end{document}
