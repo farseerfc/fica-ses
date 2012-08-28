@@ -139,7 +139,7 @@ var reloadIFrame = function(frame) {
 -->
             <article>
                 <h1>
-                    Motivating Example
+                    Pilot Study
                 </h1>
                 <p>
                 </p>
@@ -169,14 +169,16 @@ var reloadIFrame = function(frame) {
                             <i class="icon-check icon-large">
                             </i>
                             interesting
+                            <small>(as blue)</small>
                         </span>
                         or
                         <span class="red">
                             <i class="icon-check-empty icon-large">
                             </i>
                             not interesting
+                            <small>as red</small>
                         </span>
-                        .
+                        , without telling them the rule of judgments.
                     </p>
                     <p>
                         As a result ...
@@ -252,11 +254,13 @@ var reloadIFrame = function(frame) {
                     <p>
                         These two clones are
                         <span class="blue">
-                            doing same thing
+                            having the same behavior
+                            <small>infers an interesting clone</small>
                         </span>
-                        , as
+                        , but as
                         <span class="red">
-                            a fragment of large function
+                            a fragment of large functions
+                            <small>infers an un-interesting clone</small>
                         </span>
                         .
                     </p>
@@ -265,18 +269,16 @@ var reloadIFrame = function(frame) {
                 </iframe>
             </article>
             <script type="text/javascript">
-
 function multiworkflow() {
     $('#workflowimg').animate({
         width: '400px',
         height: '280px',
     },500,function(){
-        for(var i=150;i<450;i+=50){
+        for(var i=200;i<500;i+=100){
             var newimg=$('#workflowimg').clone();
             newimg.css('top',i+'px').css('left',i+'px').css('z-index',i).prependTo("#workflowimgcont");
         }
     });
-    
 }
 </script>
             </script>
@@ -287,6 +289,22 @@ function multiworkflow() {
                 <div id="workflowimgcont" >
                     <img id="workflowimg" style="position:absolute;top:100px;left:100px;z-index:0" 
                         src="include/overall_workflow.png" alt="" width="800px" height="560px">
+                </div>
+            </article>
+<script type="text/javascript">
+function rankimg() {
+    $('#rank1').fadeOut(500,function(){
+        $('#rank2').fadeIn(500);
+    });
+}
+</script>
+            <article onslideenter="reloadFrame(this)" onclick="rankimg();">
+                <h3>
+                    Ranking of Clonesets
+                </h3>
+                <div id="" sytle="vertical-align:">
+                    <img id="rank1" src="images/rank-1.svg" alt="" width="800px" height="560px">
+                    <img id="rank2" src="images/rank-2.svg" alt="" width="800px" height="560px" style="display: none">
                 </div>
             </article>
             <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
@@ -332,17 +350,17 @@ function virtualizeTokenize() {
     switch (virtualizeTokenizeState) {
     case 0:
         $("#tokencode").fadeOut(500, function() {
-            $(this).text(['STRUCT ID TIMES ID LPAREN CONST ID ID TIMES ID RPAREN ', 'LBRACE ', '    STRUCT ID TIMES ID EQUALS ID LPAREN ID RPAREN SEMI', '    IF LPAREN LNOT ID RPAREN ', '        RETURN ID LPAREN ID COMMA ID COMMA ID LPAREN RPAREN RPAREN SEMI ', '    IF LPAREN LNOT ID ARROW ID RPAREN ', '        ID ARROW ID EQUALS ID SEMI ', '    IF LPAREN ID ARROW ID NE ID RPAREN LBRACE ', '        ID LPAREN STRING_LITERAL COMMA ', '            ID LPAREN ID RPAREN COMMA ID LPAREN ID ARROW ID RPAREN RPAREN SEMI', '        RETURN ID SEMI', '    RBRACE ', '    RETURN LPAREN STRUCT ID TIMES RPAREN ID SEMI ', 'RBRACE', ].join('\n')).fadeIn(500);
+            $(this).text(['','STRUCT ID TIMES ID LPAREN CONST ID ID TIMES ID RPAREN ', 'LBRACE ', '    STRUCT ID TIMES ID EQUALS ID LPAREN ID RPAREN SEMI', '    IF LPAREN LNOT ID RPAREN ', '        RETURN ID LPAREN ID COMMA ID COMMA ID LPAREN RPAREN RPAREN SEMI ', '    IF LPAREN LNOT ID ARROW ID RPAREN ', '        ID ARROW ID EQUALS ID SEMI ', '    IF LPAREN ID ARROW ID NE ID RPAREN LBRACE ', '        ID LPAREN STRING_LITERAL COMMA ', '            ID LPAREN ID RPAREN COMMA ID LPAREN ID ARROW ID RPAREN RPAREN SEMI', '        RETURN ID SEMI', '    RBRACE ', '    RETURN LPAREN STRUCT ID TIMES RPAREN ID SEMI ', 'RBRACE', ].join('\n')).fadeIn(500);
         });
         break;
     case 1:
         $("#tokencode").fadeOut(500, function() {
-            $(this).text(['STRUCT ID TIMES ID LPAREN CONST ID ID TIMES ID RPAREN ', 'LBRACE ', 'STRUCT ID TIMES ID EQUALS ID LPAREN ID RPAREN SEMI ', 'IF LPAREN LNOT ID RPAREN ', 'RETURN ID LPAREN ID COMMA ID COMMA ID LPAREN RPAREN RPAREN SEMI ', 'IF LPAREN LNOT ID ARROW ID RPAREN ', 'ID ARROW ID EQUALS ID SEMI ', 'IF LPAREN ID ARROW ID NE ID RPAREN LBRACE ', 'ID LPAREN STRING_LITERAL COMMA ', 'ID LPAREN ID RPAREN COMMA ID LPAREN ID ARROW ID RPAREN RPAREN SEMI ', 'RETURN ID SEMI ', 'RBRACE ', 'RETURN LPAREN STRUCT ID TIMES RPAREN ID SEMI ', 'RBRACE', ].join('')).fadeIn(500);
+            $(this).text(['\n','STRUCT ID TIMES ID LPAREN CONST ID ID TIMES ID RPAREN ', 'LBRACE ', 'STRUCT ID TIMES ID EQUALS ID LPAREN ID RPAREN SEMI ', 'IF LPAREN LNOT ID RPAREN ', 'RETURN ID LPAREN ID COMMA ID COMMA ID LPAREN RPAREN RPAREN SEMI ', 'IF LPAREN LNOT ID ARROW ID RPAREN ', 'ID ARROW ID EQUALS ID SEMI ', 'IF LPAREN ID ARROW ID NE ID RPAREN LBRACE ', 'ID LPAREN STRING_LITERAL COMMA ', 'ID LPAREN ID RPAREN COMMA ID LPAREN ID ARROW ID RPAREN RPAREN SEMI ', 'RETURN ID SEMI ', 'RBRACE ', 'RETURN LPAREN STRUCT ID TIMES RPAREN ID SEMI ', 'RBRACE', ].join('')).fadeIn(500);
         });
         break;
     case 2:
         $("#tokencode").fadeOut(500, function() {
-            $(this).text(['STRUCT ID TIMES ', '       ID TIMES ID ', '          TIMES ID LPAREN ', '                ID LPAREN CONST ', '                   LPAREN CONST ID ', '                          CONST ID ID ', '                                ID ID TIMES ', '                                   ID TIMES ID', '                                      TIMES ID RPAREN', '                                            ...', ].join('\n')).fadeIn(500);
+            $(this).text(['','STRUCT ID TIMES ', '       ID TIMES ID ', '          TIMES ID LPAREN ', '                ID LPAREN CONST ', '                   LPAREN CONST ID ', '                          CONST ID ID ', '                                ID ID TIMES ', '                                   ID TIMES ID', '                                      TIMES ID RPAREN', '                                            ...', ].join('\n')).fadeIn(500);
         });
         break;
     }
@@ -437,6 +455,9 @@ SEMI RBRACE RETURN      :0.00943396226415
                     <p>
                         This calculates normalized similarity between two clonesets.
                     </p>
+                    <center>
+                        <img src="images/sim.svg" width="600px" height="350px">
+                    </center>
                 </div>
             </article>
             <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
@@ -458,67 +479,196 @@ tfidf(b,D): { "B": 0.8, "C":0.7, "E":0.3, "F":0.8}
                     </p>
                 </div>
             </article>
-            <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
-                <h3>
-                    Possibility
-                <small>a cloneset \(d\) belong to a group \(M\)</small>
-                </h3>
-                \[ poss(d, M) = \left\{ \begin{array}{cl} 1 &amp;, |M| = 0 \\ \frac{\sum_{\forall
-                m \in M} nsim(d, m, M) }{|M|} &amp;, \mbox{otherwise} \end{array} \right.
-                \]
 
-                <script type="text/javascript">
-                                var changePossiImgState = 0;
-
+<script type="text/javascript">
+var changePossiImgState = 0;
 function changePossiImg() {
     switch (changePossiImgState) {
     case 0:
         $("#possimg").fadeOut(500, function() {
-            $(this).attr('src','images/possibility-2.svg').fadeIn(500);
+            $(this).attr('src','images/possibility-3.svg').fadeIn(500);
         });
+        $("#posstext2").fadeIn(500);
         break;
     case 1:
         $("#possimg").fadeOut(500, function() {
-            $(this).attr('src','images/possibility-3.svg').fadeIn(500);
+            $(this).attr('src','images/possibility-2.svg').fadeIn(500);
         });
+        $("#posstext3").fadeIn(500);
+        break;
+    case 2:
+        $("#possimg").fadeOut(500, function() {
+            $(this).attr('src','images/possibility-1.svg').fadeIn(500);
+        });
+        $("#posstext4").fadeIn(500);
         break;
     }
     changePossiImgState++;
 }
 </script>
-                <center>
+            <article onslideenter="reloadFrame(this)" onclick="changePossiImg();" >
+                <h3>
+                    Possibility
+                <small>of a cloneset \(d\) belongs to a group \(M\)</small>
+                </h3>
+                \[ poss(d, M) = \left\{ \begin{array}{cl} 1 &amp;, |M| = 0 \\ \frac{\sum_{\forall
+                m \in M} nsim(d, m, M) }{|M|} &amp;, \mbox{otherwise} \end{array} \right.
+                \]
+                
+                <div style="width:800px">
+                    <div style="float:left;width:350px">
+                        <p id="posstext">
+                            For each cloneset \(d\), given interesting set 
+                            <span class="blue">\(M_i\)</span>
+                            and un-interesting set <span class="red">\(M_u\)</span>.
+                        </p>
+                        <p id="posstext2" style="display: None">
+                            Calculates its possibility to be 
+                            <span class='blue'>interesting</span>, \({poss}_i\) ...
+                        </p>
+                        <p id="posstext3" style="display: None">
+                            and its possibility to be 
+                            <span class='red'>un-interesting</span>, \({poss}_u\) ...
+                        </p>
+                        <p id="posstext4" style="display: None">
+                            and rank <small>(sort)</small> all the clonesets 
+                            \[\frac{{poss}_i}{{poss}_u}\]
+                        </p>
+                    </div>
                     <img id="possimg" src="images/possibility-1.svg" alt="" 
-                        onclick="changePossiImg();" width="400px">
-                </center>
+                        width="400px">
+                </div>
+            
             </article>
+
+            <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
+                <h1>
+                    Fica
+                </h1>
+                <h2 style="text-align:left">
+                    <span style="color:red">
+                        F
+                    </span>
+                    ilter for
+                    <br/>
+                    <span style="color:red">
+                        I
+                    </span>
+                    ndividual user on code
+                    <br/>
+                    <span style="color:red">
+                        C
+                    </span>
+                    lone
+                    <br/>
+                    <span style="color:red">
+                        A
+                    </span>
+                    nalysis
+                </h2>
+            </article>
+            <article onslideenter="reloadFrame(this)" class="fill">
+                <h3>
+                    The Website
+                </h3>
+                <iframe width="1300px" height="800px" src="include/ficawebsite.html" frameborder="0">
+                </iframe>
+            </article>
+            <article onslideenter="reloadFrame(this)" class="fill">
+                <h3>
+                    After Login
+                </h3>
+                <iframe width="1300px" height="800px" src="include/fica-empty.html" frameborder="0">
+                </iframe>
+            </article>
+
+            <article onslideenter="reloadFrame(this)" class="fill">
+                <h3>
+                    In a project
+                </h3>
+                <iframe width="1300px" height="800px" src="include/fica-inside.html" frameborder="0">
+                </iframe>
+            </article>
+
+            <article onslideenter="reloadFrame(this)" class="fill">
+                <h3>
+                    During the Survey
+                </h3>
+                <iframe width="1300px" height="800px" src="include/fica-half.html" frameborder="0">
+                </iframe>
+            </article>
+
+            <article onslideenter="reloadFrame(this)" class="fill">
+                <h3>
+                    After Finished Survey
+                </h3>
+                <iframe width="1300px" height="800px" src="include/logined.html" frameborder="0">
+                </iframe>
+            </article>
+
+
+            <article>
+                <h3>Experiment Process</h3>
+                <div class="build" style="vertical-align: middle">
+                    <p>
+                        Different from imaginary workflow, during the survey,
+                        we asked the participants to mark <span class="red">all</span>
+                        the clonesets in all projects, as <span class="blue">interesting</span>
+                        or <span class="red">not interesting</span>.
+                    </p>
+                    <p>
+                        Then all the clonesets are divided into 
+                        <span class="green">training-set</span> and 
+                        <span class="green">evaluation-set</span>.
+                    </p>
+                    <p>
+                        For each <span class="green">cloneset</span> in 
+                        <span class="green">evaluation-set</span>, 
+                        <span class="blue">\({poss_i}\)</span> and 
+                        <span class="red">\({poss_u}\)</span>
+                        are calculated.
+                    </p>
+                    <p>
+                        Clonesets are ranked by \(\frac{{poss}_i}{{poss}_u}\).
+                    </p>
+                    <p>
+                        Predictions are made by whether \(\frac{{poss}_i}{{poss}_u}>1\).
+                    </p>
+                    <p>
+                        And predictions are compared with the selections by user to 
+                        evaluate the accuracy of the machine learning algorithm.
+                    </p>
+                </div>
+            </article>
+
             <article onslideenter="reloadFrame(this)" class="small">
                 <h3>
                     Individual Prediction
                 </h3>
                 <div style="width:800px">
-                    <div style="width:500px;float:left;">
-                        <iframe width="1300px" height="800px" src="include/hotta-result.html"
+                    <div style="width:450px;float:left;">
+                        <iframe width="1300px" height="800px" src="include/indi-result.html"
                         frameborder="0">
                         </iframe>
                     </div>
-                    <div style="width:300px;float:left;margin=10px;">
+                    <div style="width:300px;float:left;margin-left:20px;">
                         <p>
-                            Training set 50
+                            Training set 18
                         </p>
                         <p>
-                            Evaluation set 55
+                            Evaluation set 18
                         </p>
                         <p>
-                            Matched 50
+                            Matched 14
                         </p>
                         <p>
-                            Unmatched user feel un-interesting 5
+                            Unmatched user feel un-interesting 3
                         </p>
                         <p>
-                            Unmatched user feel interesting 0
+                            Unmatched user feel interesting 1
                         </p>
                         <p>
-                            Accuracy 90.91%
+                            Accuracy 77.78%
                         </p>
                     </div>
                 </div>
@@ -1666,59 +1816,37 @@ fdg("include/e2fsprogs-fdg.json", "#e2fsprogs-target2", 300, (Math.pow(10, 100 /
                     </li>
                 </ul>
             </article>
-            <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
-                <h1>
-                    Fica
-                </h1>
-                <h2 style="text-align:left">
-                    <span style="color:red">
-                        F
-                    </span>
-                    ilter for
-                    <br/>
-                    <span style="color:red">
-                        I
-                    </span>
-                    ndividual user on code
-                    <br/>
-                    <span style="color:red">
-                        C
-                    </span>
-                    lone
-                    <br/>
-                    <span style="color:red">
-                        A
-                    </span>
-                    nalysis
+
+            <article>
+                <h2>
+                    Future Work
                 </h2>
+                <div class="build">
+                    <p>
+                        
+                    </p>
+                    <p>
+                        We hope to invite more people to this survey.
+                    </p>
+                    <a href="http://tyr.ics.es.osaka-u.ac.jp">
+                        http://tyr.ics.es.osaka-u.ac.jp
+                    </a>
+                    <p>
+                        Experiment on more projects for other programming
+                        language than C.
+                    </p>
+                    
+                </div>
             </article>
-            <article onslideenter="reloadFrame(this)" class="fill">
-                <h3>
-                    The Website
-                </h3>
-                <iframe width="1300px" height="800px" src="include/ficawebsite.html" frameborder="0">
-                </iframe>
-            </article>
-            <article onslideenter="reloadFrame(this)" class="fill">
-                <h3>
-                    After Login
-                </h3>
-                <iframe width="1300px" height="800px" src="include/logined.html" frameborder="0">
-                </iframe>
-            </article>
-            <article onslideenter="reloadFrame(this)" class="fill">
-                <h3>
-                    In a project
-                </h3>
-                <iframe width="1300px" height="800px" src="include/projectgit.html" frameborder="0">
-                </iframe>
-            </article>
+            
             <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">
                 <h1>
                     Thank you
                 </h1>
                 <h3>
-                    質問は日本語でも大丈夫です
+                    <br/>
+                    質問は日本語、英語もしくは中国語でも大丈夫です。<br/>
+                    Question can be in English, Japanese or Chinese.
                 </h3>
             </article>
             <article onslideenter="reloadFrame(this)" onclick="reloadIFrame(this)">

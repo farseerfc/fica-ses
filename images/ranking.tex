@@ -1,0 +1,62 @@
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usetikzlibrary{shapes,arrows,shadows,mindmap,backgrounds}
+
+\newcommand{\fcshadow}[1]{%
+\tikz[baseline]\path[anchor=base]
+node[fill opacity=0.1] at (0.05em,-0.05em) {#1}
+node[fill opacity=0.1] at (0.03em,-0.05em) {#1}
+node[fill opacity=0.1] at (0.05em,-0.03em) {#1}
+node[fill opacity=0.1] at (0.05em,-0.07em) {#1}
+node[fill opacity=0.1] at (0.07em,-0.05em) {#1}
+node at (0pt,0pt) {#1};}
+
+\begin{document}
+\frame{
+\begin{columns}
+\begin{column}{12em}
+\begin{tabular}{|c|c|c|}
+\hline
+ID & Clonesets & Interesting?\\
+\hline
+1& AAA &\tikz[remember picture]\node (d1b){};\\
+2& BBB &\tikz[remember picture]\node (d2b){};\\
+3& CCC &\tikz[remember picture]\node (d3b){};\\
+4& DDD &\tikz[remember picture]\node (d4b){};\\
+5& EEE &\tikz[remember picture]\node (d5b){};\\
+6& FFF &\tikz[remember picture]\node (d6b){};\\
+7& III &\tikz[remember picture]\node (d7b){};\\
+\ldots&\ldots&\ldots\\
+\hline
+\end{tabular}
+\end{column}
+\visible<2->{
+\begin{column}{12em}
+\begin{tabular}{|c|c|c|}
+\hline
+ID & Clonesets & Interesting?\\
+\hline
+\rowcolor{blue!50}\tikz[remember picture]\node (d1e){};1& AAA & \fcshadow{\checkmark}\\
+\rowcolor{red!50} \tikz[remember picture]\node (d2e){};2& BBB & X\\
+\tikz[remember picture]\node (d7e){};7& III & 90\% \\
+\tikz[remember picture]\node (d5e){};5& EEE & 70\% \\
+\tikz[remember picture]\node (d3e){};3& CCC & 50\% \\
+\tikz[remember picture]\node (d6e){};6& FFF & 30\% \\
+\tikz[remember picture]\node (d4e){};4& DDD & 10\% \\
+\ldots&\ldots&\ldots\\
+\hline
+\end{tabular}
+\end{column}
+}
+\end{columns}
+\visible<2->{
+\begin{tikzpicture}[remember picture,overlay,->,>=latex,ultra thick]
+\draw(d3b)--(d3e);
+\draw(d4b)--(d4e);
+\draw(d5b)--(d5e);
+\draw(d6b)--(d6e);
+\draw(d7b)--(d7e);
+\end{tikzpicture}}
+}
+\end{document}
